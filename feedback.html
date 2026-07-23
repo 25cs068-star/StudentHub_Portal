@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudentHub Portal - Feedback</title>
+</head>
+<body>
+
+    <center>
+        <header>
+            <br>
+            <img src="logo.jfif" alt="StudentHub Portal Logo" width="150" height="150">
+            <h1>StudentHub Portal</h1>
+            <p>Your Digital Campus and Academic Companion</p>
+            <hr width="80%">
+            
+            <nav aria-label="Main Navigation">
+                <a href="index.html">Home</a> | 
+                <a href="about.html">About</a> | 
+                <a href="register.html">Register</a> | 
+                <a href="login.html">Login</a> | 
+                <a href="dashboard.html">Dashboard</a> | 
+                <a href="events.html">Events</a> | 
+                <a href="profile.html">Profile</a> | 
+                <a href="contact.html">Contact</a> | 
+                <a href="faq.html">FAQ</a> | 
+                <a href="feedback.html">Feedback</a>
+            </nav>
+            <hr width="80%">
+        </header>
+
+        <main>
+            <section>
+                <h2>Student Feedback</h2>
+                <p>We value your suggestions and feedback to improve our campus portal.</p>
+                <br>
+                <hr width="60%">
+            </section>
+
+            <section>
+                <h2>Feedback Form</h2>
+                <!-- action="#" ane novalidate thi koi popup ke warning message nahi aave -->
+                <form action="#" novalidate>
+                    <p><b>Your Name:</b></p>
+                    <p><input type="text" name="fullname" placeholder="Enter your name"></p>
+
+                    <p><b>Email Address:</b></p>
+                    <p><input type="text" name="email" placeholder="Enter your email"></p>
+
+                    <p><b>Category:</b></p>
+                    <p>
+                        <select name="category">
+                            <option value="general">General Suggestion</option>
+                            <option value="website">Website Improvement</option>
+                            <option value="academic">Academic Services</option>
+                        </select>
+                    </p>
+
+                    <p><b>Your Feedback / Comments:</b></p>
+                    <p><textarea name="comments" rows="4" cols="30" placeholder="Type your feedback here"></textarea></p>
+
+                    <br>
+                    <p>
+                        <input type="submit" value="Submit Feedback">
+                        <input type="reset" value="Clear">
+                    </p>
+                </form>
+                <br>
+                <hr width="80%">
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2026 StudentHub Portal. All rights reserved.</p>
+        </footer>
+    </center>
+
+</body>
+</html>

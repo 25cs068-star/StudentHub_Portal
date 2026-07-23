@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudentHub Portal - Login</title>
+</head>
+<body>
+
+    <center>
+        <header>
+            <br>
+            <img src="logo.jfif" alt="StudentHub Portal Logo" width="150" height="150">
+            <h1>StudentHub Portal</h1>
+            <p>Your Digital Campus and Academic Companion</p>
+            <hr width="80%">
+            
+            <nav aria-label="Main Navigation">
+                <a href="index.html">Home</a> | 
+                <a href="about.html">About</a> | 
+                <a href="register.html">Register</a> | 
+                <a href="login.html">Login</a> | 
+                <a href="dashboard.html">Dashboard</a> | 
+                <a href="events.html">Events</a> | 
+                <a href="profile.html">Profile</a> | 
+                <a href="contact.html">Contact</a> | 
+                <a href="faq.html">FAQ</a> | 
+                <a href="feedback.html">Feedback</a>
+            </nav>
+            <hr width="80%">
+        </header>
+
+        <main>
+            <section>
+                <h2>User Login</h2>
+                <p>Please select your role and enter your credentials to access your account.</p>
+                <br>
+                <hr width="60%">
+            </section>
+
+            <section>
+                <h2>Login Instructions</h2>
+                <ul type="none">
+                    <li><b>Students:</b> Use your official Enrollment Number as your Username.</li>
+                    <li><b>Administrators:</b> Use your assigned Institutional ID to log in.</li>
+                    <li>Ensure caps lock is turned off while typing your password.</li>
+                </ul>
+                <br>
+                <hr width="60%">
+            </section>
+
+            <section>
+                <h2>Login Form</h2>
+                <!-- action="#" thi submit karya pachi pan aena ae j page per rehse, bija page per nahi jaay -->
+                <form action="#" novalidate>
+                    <table border="0" cellpadding="8" width="40%">
+                        <tr>
+                            <td align="right" width="40%"><b>User Role:</b></td>
+                            <td align="left" width="60%">
+                                <select name="role">
+                                    <option value="student">Student</option>
+                                    <option value="admin">Administrator</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="right"><b>Enrollment No / ID:</b></td>
+                            <td align="left"><input type="text" name="username" placeholder="Enter ID or Enrollment"></td>
+                        </tr>
+                        <tr>
+                            <td align="right"><b>Password:</b></td>
+                            <td align="left"><input type="password" name="password" placeholder="Enter password"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" align="center">
+                                <br>
+                                <input type="submit" value="Login">
+                                <input type="reset" value="Clear">
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+                <br>
+                <hr width="60%">
+            </section>
+
+            <section>
+                <h2>Need an Account?</h2>
+                <p>New user? Create an account on the <a href="register.html">Register Page</a>.</p>
+                <br>
+                <hr width="80%">
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2026 StudentHub Portal. All rights reserved.</p>
+        </footer>
+    </center>
+
+</body>
+</html>

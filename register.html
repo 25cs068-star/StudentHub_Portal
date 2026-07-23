@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudentHub Portal - Register</title>
+</head>
+<body>
+
+    <center>
+        <header>
+            <br>
+            <img src="logo.jfif" alt="StudentHub Portal Logo" width="150" height="150">
+            <h1>StudentHub Portal</h1>
+            <p>Your Digital Campus and Academic Companion</p>
+            <hr width="80%">
+            
+            <nav aria-label="Main Navigation">
+                <a href="index.html">Home</a> | 
+                <a href="about.html">About</a> | 
+                <a href="register.html">Register</a> | 
+                <a href="login.html">Login</a> | 
+                <a href="dashboard.html">Dashboard</a> | 
+                <a href="events.html">Events</a> | 
+                <a href="profile.html">Profile</a> | 
+                <a href="contact.html">Contact</a> | 
+                <a href="faq.html">FAQ</a> | 
+                <a href="feedback.html">Feedback</a>
+            </nav>
+            <hr width="80%">
+        </header>
+
+        <main>
+            <section>
+                <h2>Student Registration</h2>
+                <p>Fill in the details below to create your StudentHub account.</p>
+                <br>
+                <hr width="60%">
+            </section>
+
+            <section>
+                <h2>Registration Form</h2>
+                <form action="login.html" novalidate>
+                    <table border="0" cellpadding="8" width="50%">
+                        <tr>
+                            <td align="right" width="40%"><b>Full Name:</b></td>
+                            <td align="left" width="60%"><input type="text" name="fullname" placeholder="Enter your full name"></td>
+                        </tr>
+                        <tr>
+                            <td align="right"><b>Enrollment No:</b></td>
+                            <td align="left"><input type="text" name="enrollment" placeholder="Enter enrollment number"></td>
+                        </tr>
+                        <tr>
+                            <td align="right"><b>Email Address:</b></td>
+                            <td align="left"><input type="text" name="email" placeholder="student@example.com"></td>
+                        </tr>
+                        <tr>
+                            <td align="right"><b>Department:</b></td>
+                            <td align="left">
+                                <select name="department">
+                                    <option value="">Select Department</option>
+                                    <option value="Computer Science">Computer Science / IT</option>
+                                    <option value="Electronics">Electronics & Communication</option>
+                                    <option value="Electrical">Electrical Engineering</option>
+                                    <option value="Mechanical">Mechanical Engineering</option>
+                                    <option value="Civil">Civil Engineering</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="right"><b>Password:</b></td>
+                            <td align="left"><input type="password" name="password" placeholder="Create password"></td>
+                        </tr>
+                        <tr>
+                            <td align="right"><b>Confirm Password:</b></td>
+                            <td align="left"><input type="password" name="cpassword" placeholder="Confirm password"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" align="center">
+                                <br>
+                                <input type="submit" value="Register Now">
+                                <input type="reset" value="Clear Form">
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+                <br>
+                <hr width="60%">
+            </section>
+
+            <section>
+                <h2>Already Registered?</h2>
+                <p>If you already have an active account, please proceed to the <a href="login.html">Login Page</a>.</p>
+                <br>
+                <hr width="80%">
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2026 StudentHub Portal. All rights reserved.</p>
+        </footer>
+    </center>
+
+</body>
+</html>
