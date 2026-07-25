@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,66 +8,124 @@
 <body>
 
     <center>
+        <!-- TOP HEADER SECTION WITH HORIZONTAL NAV MENU -->
         <header>
             <br>
-            <img src="logo.jfif" alt="StudentHub Portal Logo" width="150" height="150">
+            <img src="logo.jfif" alt="StudentHub Portal Logo" width="130" height="130">
             <h1>StudentHub Portal</h1>
             <p>Your Digital Campus and Academic Companion</p>
-            <hr width="80%">
+            <hr width="85%">
             
             <nav aria-label="Main Navigation">
                 <a href="index.html">Home</a> | 
                 <a href="about.html">About</a> | 
                 <a href="register.html">Register</a> | 
                 <a href="login.html">Login</a> | 
-                <a href="dashboard.html">Dashboard</a> | 
+                <a href="dashboard.html"><b><u>Dashboard</u></b></a> | 
                 <a href="events.html">Events</a> | 
                 <a href="profile.html">Profile</a> | 
                 <a href="contact.html">Contact</a> | 
                 <a href="faq.html">FAQ</a> | 
                 <a href="feedback.html">Feedback</a>
             </nav>
-            <hr width="80%">
+            <hr width="85%">
         </header>
 
-        <main>
-            <section>
-                <h2>Student Dashboard</h2>
-                <p>Welcome to your personal account dashboard.</p>
-                <br>
-                <hr width="60%">
-            </section>
+        <!-- MAIN DASHBOARD CONTENT -->
+        <main style="width: 85%;">
+            <br>
+            
+            <!-- WELCOME HEADER -->
+            <table border="0" width="100%">
+                <tr>
+                    <td align="left">
+                        <h2>Student Dashboard</h2>
+                        <p>Welcome back, Student!</p>
+                    </td>
+                    <td align="right">
+                        <b>Enrollment:</b> 25CSXXX
+                    </td>
+                </tr>
+            </table>
+            <br>
 
-            <section>
-                <h2>Student Details</h2>
-                <p><b>Name:</b> Student Name</p>
-                <p><b>Enrollment Number:</b> 2026CS101</p>
-                <p><b>Department:</b> Computer Science</p>
-                <p><b>Semester:</b> 4th Semester</p>
-                <br>
-                <hr width="60%">
-            </section>
+            <!-- TOP STATS CARDS ROW (COLOR REMOVED) -->
+            <table border="1" cellpadding="12" cellspacing="0" width="100%">
+                <tr align="center">
+                    <td width="33%">
+                        <h1>100</h1>
+                        <p><b>Total Classes</b></p>
+                    </td>
+                    <td width="33%">
+                        <h1>85</h1>
+                        <p><b>Classes Attended</b></p>
+                    </td>
+                    <td width="33%">
+                        <h1>85%</h1>
+                        <p><b>Overall Attendance</b></p>
+                    </td>
+                </tr>
+            </table>
 
-            <section>
-                <h2>Attendance Overview</h2>
-                <p><b>Total Classes Held:</b> 100</p>
-                <p><b>Classes Attended:</b> 85</p>
-                <p><b>Overall Attendance Percentage:</b> 85%</p>
-                <p><b>Status:</b> Satisfactory</p>
-                <br>
-                <hr width="60%">
-            </section>
+            <br><br>
 
-            <section>
-                <h2>Account Status</h2>
-                <p>Your portal account is active and verified by the administration.</p>
-                <br>
-                <hr width="80%">
-            </section>
+            <!-- MIDDLE GRID SECTION (Student Info + Schedule) -->
+            <table border="0" cellpadding="10" cellspacing="0" width="100%">
+                <tr>
+                    <!-- LEFT BOX: Student Info Card -->
+                    <td width="45%" valign="top">
+                        <table border="1" cellpadding="12" cellspacing="0" width="100%">
+                            <tr>
+                                <td>
+                                    <h3>Student Info</h3>
+                                    <hr>
+                                    <p><b>Name:</b> Student Name</p>
+                                    <p><b>Department:</b> Computer Science</p>
+                                    <p><b>Semester:</b> 4th Semester</p>
+                                    <p><b>Status:</b> Active / Satisfactory</p>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+
+                    <!-- RIGHT BOX: Today's Schedule Table -->
+                    <td width="55%" valign="top">
+                        <table border="1" cellpadding="8" cellspacing="0" width="100%">
+                            <tr>
+                                <th colspan="3">Today's Schedule</th>
+                            </tr>
+                            <tr>
+                                <th>Time</th>
+                                <th>Subject</th>
+                                <th>Venue</th>
+                            </tr>
+                            <tr>
+                                <td>10:00 - 11:00</td>
+                                <td>Mathematics</td>
+                                <td>Lab 1</td>
+                            </tr>
+                            <tr>
+                                <td>11:00 - 12:00</td>
+                                <td>Computer Networks</td>
+                                <td>Room 204</td>
+                            </tr>
+                            <tr>
+                                <td>12:00 - 01:00</td>
+                                <td>Data Structures</td>
+                                <td>Lab 3</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+
+            <br>
+            <hr width="100%">
         </main>
 
+        <!-- FOOTER -->
         <footer>
-            <p>&copy; 2026 StudentHub Portal. All rights reserved.</p>
+            <p><small>&copy; 2026 StudentHub Portal. All rights reserved.</small></p>
         </footer>
     </center>
 

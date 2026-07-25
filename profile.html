@@ -8,12 +8,13 @@
 <body>
 
     <center>
+        <!-- TOP HEADER SECTION WITH HORIZONTAL NAV MENU -->
         <header>
             <br>
-            <img src="logo.jfif" alt="StudentHub Portal Logo" width="150" height="150">
+            <img src="logo.jfif" alt="StudentHub Portal Logo" width="130" height="130">
             <h1>StudentHub Portal</h1>
             <p>Your Digital Campus and Academic Companion</p>
-            <hr width="80%">
+            <hr width="85%">
             
             <nav aria-label="Main Navigation">
                 <a href="index.html">Home</a> | 
@@ -22,45 +23,73 @@
                 <a href="login.html">Login</a> | 
                 <a href="dashboard.html">Dashboard</a> | 
                 <a href="events.html">Events</a> | 
-                <a href="profile.html">Profile</a> | 
+                <a href="profile.html"><b><u>Profile</u></b></a> | 
                 <a href="contact.html">Contact</a> | 
                 <a href="faq.html">FAQ</a> | 
                 <a href="feedback.html">Feedback</a>
             </nav>
-            <hr width="80%">
+            <hr width="85%">
         </header>
 
-        <main>
-            <section>
-                <h2>Student Profile</h2>
-                <p>Personal and Academic Information</p>
-                <br>
-                <hr width="60%">
-            </section>
+        <!-- MAIN CONTENT SECTION -->
+        <main style="width: 85%;">
+            <br>
+            
+            <!-- WELCOME HEADER -->
+            <table border="0" width="100%">
+                <tr>
+                    <td align="left">
+                        <h2>Student Profile</h2>
+                        <p>Personal and Academic Information</p>
+                    </td>
+                </tr>
+            </table>
+            <br>
 
-            <section>
-                <h2>Personal Details</h2>
-                <p><b>Full Name:</b> Student Name</p>
-                <p><b>Enrollment Number:</b> 2026CS101</p>
-                <p><b>Email Address:</b> student@example.com</p>
-                <p><b>Contact Number:</b> +91 9876543210</p>
-                <br>
-                <hr width="60%">
-            </section>
+            <!-- PROFILE DETAILS GRID (2 COLUMNS) -->
+            <table border="0" cellpadding="10" cellspacing="0" width="100%">
+                <tr>
+                    <!-- LEFT BOX: PERSONAL DETAILS -->
+                    <td width="50%" valign="top">
+                        <table border="1" cellpadding="12" cellspacing="0" width="100%">
+                            <tr>
+                                <td>
+                                    <h3>Personal Details</h3>
+                                    <hr>
+                                    <p><b>Full Name:</b> Student Name</p>
+                                    <p><b>Enrollment Number:</b> 2026CS101</p>
+                                    <p><b>Email Address:</b> student@example.com</p>
+                                    <p><b>Contact Number:</b> +91 9876543210</p>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
 
-            <section>
-                <h2>Academic Info</h2>
-                <p><b>Department:</b> Computer Science</p>
-                <p><b>Course:</b> B.Tech / BE</p>
-                <p><b>Current Semester:</b> 4th Semester</p>
-                <p><b>Batch:</b> 2024 - 2028</p>
-                <br>
-                <hr width="80%">
-            </section>
+                    <!-- RIGHT BOX: ACADEMIC INFO -->
+                    <td width="50%" valign="top">
+                        <table border="1" cellpadding="12" cellspacing="0" width="100%">
+                            <tr>
+                                <td>
+                                    <h3>Academic Info</h3>
+                                    <hr>
+                                    <p><b>Department:</b> Computer Science</p>
+                                    <p><b>Course:</b> B.Tech / BE</p>
+                                    <p><b>Current Semester:</b> 4th Semester</p>
+                                    <p><b>Batch:</b> 2024 - 2028</p>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+
+            <br>
+            <hr width="100%">
         </main>
 
+        <!-- FOOTER -->
         <footer>
-            <p>&copy; 2026 StudentHub Portal. All rights reserved.</p>
+            <p><small>&copy; 2026 StudentHub Portal. All rights reserved.</small></p>
         </footer>
     </center>
 

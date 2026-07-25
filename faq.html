@@ -8,12 +8,13 @@
 <body>
 
     <center>
+        <!-- TOP HEADER SECTION WITH HORIZONTAL NAV MENU -->
         <header>
             <br>
-            <img src="logo.jfif" alt="StudentHub Portal Logo" width="150" height="150">
+            <img src="logo.jfif" alt="StudentHub Portal Logo" width="130" height="130">
             <h1>StudentHub Portal</h1>
             <p>Your Digital Campus and Academic Companion</p>
-            <hr width="80%">
+            <hr width="85%">
             
             <nav aria-label="Main Navigation">
                 <a href="index.html">Home</a> | 
@@ -24,44 +25,86 @@
                 <a href="events.html">Events</a> | 
                 <a href="profile.html">Profile</a> | 
                 <a href="contact.html">Contact</a> | 
-                <a href="faq.html">FAQ</a> | 
+                <a href="faq.html"><b><u>FAQ</u></b></a> | 
                 <a href="feedback.html">Feedback</a>
             </nav>
-            <hr width="80%">
+            <hr width="85%">
         </header>
 
-        <main>
-            <section>
-                <h2>Frequently Asked Questions</h2>
-                <p>Find answers to common questions about StudentHub Portal.</p>
-                <br>
-                <hr width="60%">
-            </section>
+        <!-- MAIN CONTENT SECTION -->
+        <main style="width: 85%;">
+            <br>
+            
+            <!-- PAGE HEADER -->
+            <table border="0" width="100%">
+                <tr>
+                    <td align="left">
+                        <h2>Frequently Asked Questions</h2>
+                        <p>Find quick answers to common questions about StudentHub Portal.</p>
+                    </td>
+                </tr>
+            </table>
+            <br>
 
-            <section>
-                <h2>General Questions</h2>
-                
-                <p><b>Q1: How do I register on StudentHub Portal?</b></p>
-                <p>Ans: Go to the Register page from the top navigation bar and fill in your registration details.</p>
-                <br>
+            <!-- FAQ ACCORDION GRID TABLE -->
+            <table border="1" cellpadding="15" cellspacing="0" width="100%">
+                <tr>
+                    <td>
+                        <h3>General Questions</h3>
+                        <hr>
+                        <br>
 
-                <p><b>Q2: What should I use as my username during login?</b></p>
-                <p>Ans: Students can use their official Enrollment Number as their username.</p>
-                <br>
+                        <!-- Q1 -->
+                        <details open>
+                            <summary><b>Q1: How do I register on StudentHub Portal?</b></summary>
+                            <p>Go to the Register page from the top navigation bar and fill in your registration details.</p>
+                        </details>
+                        <hr>
 
-                <p><b>Q3: Where can I check upcoming campus events?</b></p>
-                <p>Ans: You can check all upcoming activities and dates on the Events page.</p>
-                <br>
+                        <!-- Q2 -->
+                        <details>
+                            <summary><b>Q2: What should I use as my username during login?</b></summary>
+                            <p>Students can use their official Enrollment Number as their username.</p>
+                        </details>
+                        <hr>
 
-                <p><b>Q4: How can I contact support?</b></p>
-                <p>Ans: Visit the Contact page to view our campus address, email, and phone contact info.</p>
-                <br>
-                <hr width="80%">
-            </section>
+                        <!-- Q3 -->
+                        <details>
+                            <summary><b>Q3: Where can I check upcoming campus events?</b></summary>
+                            <p>You can check all upcoming activities and dates on the Events page.</p>
+                        </details>
+                        <hr>
+
+                        <!-- Q4 -->
+                        <details>
+                            <summary><b>Q4: How can I contact support?</b></summary>
+                            <p>Visit the Contact page to view our campus address, email, and phone contact info.</p>
+                        </details>
+
+                    </td>
+                </tr>
+            </table>
+
+            <br><br>
+
+            <!-- QUICK HELP / STILL HAVE QUESTIONS SECTION -->
+            <table border="1" cellpadding="12" cellspacing="0" width="100%">
+                <tr>
+                    <td align="center">
+                        <h3>Still Have Questions?</h3>
+                        <p>If you cannot find the answer to your question above, feel free to reach out to us.</p>
+                        <a href="contact.html">Go to Contact Support Page</a>
+                    </td>
+                </tr>
+            </table>
+
+            <br>
+            <hr width="100%">
         </main>
 
+        <!-- FOOTER -->
         <footer>
-            <p>&copy; 2026 StudentHub Portal. All rights reserved.</p>
+            <p><small>&copy; 2026 StudentHub Portal. All rights reserved.</small></p>
         </footer>
     </center>
 

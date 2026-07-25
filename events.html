@@ -8,12 +8,13 @@
 <body>
 
     <center>
+        <!-- TOP HEADER SECTION WITH HORIZONTAL NAV MENU -->
         <header>
             <br>
-            <img src="logo.jfif" alt="StudentHub Portal Logo" width="150" height="150">
+            <img src="logo.jfif" alt="StudentHub Portal Logo" width="130" height="130">
             <h1>StudentHub Portal</h1>
             <p>Your Digital Campus and Academic Companion</p>
-            <hr width="80%">
+            <hr width="85%">
             
             <nav aria-label="Main Navigation">
                 <a href="index.html">Home</a> | 
@@ -21,60 +22,86 @@
                 <a href="register.html">Register</a> | 
                 <a href="login.html">Login</a> | 
                 <a href="dashboard.html">Dashboard</a> | 
-                <a href="events.html">Events</a> | 
+                <a href="events.html"><b><u>Events</u></b></a> | 
                 <a href="profile.html">Profile</a> | 
                 <a href="contact.html">Contact</a> | 
                 <a href="faq.html">FAQ</a> | 
                 <a href="feedback.html">Feedback</a>
             </nav>
-            <hr width="80%">
+            <hr width="85%">
         </header>
 
-        <main>
-            <section>
-                <h2>Upcoming Campus Events</h2>
-                <p>Stay updated with the latest events happening in our campus.</p>
-                <br>
-                <hr width="60%">
-            </section>
+        <!-- MAIN CONTENT SECTION -->
+        <main style="width: 85%;">
+            <br>
+            
+            <!-- WELCOME HEADER -->
+            <table border="0" width="100%">
+                <tr>
+                    <td align="left">
+                        <h2>Upcoming Campus Events</h2>
+                        <p>Stay updated with the latest events happening on campus.</p>
+                    </td>
+                </tr>
+            </table>
+            <br>
 
-            <section>
-                <h2>Event List</h2>
-                
-                <p><b>1. Annual Tech Fest</b></p>
-                <p>Category: Technical</p>
-                <p>Date: 15th March</p>
-                <p>Venue: Main Auditorium</p>
-                <br>
+            <!-- EVENT CARDS ROW (GRID LAYOUT) -->
+            <table border="1" cellpadding="12" cellspacing="0" width="100%">
+                <tr>
+                    <!-- EVENT 1 -->
+                    <td width="33%" valign="top">
+                        <h3>1. Annual Tech Fest</h3>
+                        <hr>
+                        <p><b>Category:</b> Technical</p>
+                        <p><b>Date:</b> 15th March</p>
+                        <p><b>Venue:</b> Main Auditorium</p>
+                    </td>
 
-                <p><b>2. Cultural Evening</b></p>
-                <p>Category: Cultural</p>
-                <p>Date: 22nd March</p>
-                <p>Venue: Campus Ground</p>
-                <br>
+                    <!-- EVENT 2 -->
+                    <td width="33%" valign="top">
+                        <h3>2. Cultural Evening</h3>
+                        <hr>
+                        <p><b>Category:</b> Cultural</p>
+                        <p><b>Date:</b> 22nd March</p>
+                        <p><b>Venue:</b> Campus Ground</p>
+                    </td>
 
-                <p><b>3. Sports Meet</b></p>
-                <p>Category: Sports</p>
-                <p>Date: 05th April</p>
-                <p>Venue: Sports Complex</p>
-                <br>
-                <hr width="60%">
-            </section>
+                    <!-- EVENT 3 -->
+                    <td width="33%" valign="top">
+                        <h3>3. Sports Meet</h3>
+                        <hr>
+                        <p><b>Category:</b> Sports</p>
+                        <p><b>Date:</b> 05th April</p>
+                        <p><b>Venue:</b> Sports Complex</p>
+                    </td>
+                </tr>
+            </table>
 
-            <section>
-                <h2>Event Guidelines</h2>
-                <ul type="disc">
-                    <li>Carry your Student ID card for entry.</li>
-                    <li>Register before the event date.</li>
-                    <li>Maintain discipline on campus.</li>
-                </ul>
-                <br>
-                <hr width="80%">
-            </section>
+            <br><br>
+
+            <!-- GUIDELINES SECTION (SINGLE BOX CARD) -->
+            <table border="1" cellpadding="12" cellspacing="0" width="100%">
+                <tr>
+                    <td>
+                        <h3>Event Guidelines</h3>
+                        <hr>
+                        <ul type="disc">
+                            <li>Carry your Student ID card for entry.</li>
+                            <li>Register before the event date.</li>
+                            <li>Maintain discipline on campus.</li>
+                        </ul>
+                    </td>
+                </tr>
+            </table>
+
+            <br>
+            <hr width="100%">
         </main>
 
+        <!-- FOOTER -->
         <footer>
-            <p>&copy; 2026 StudentHub Portal. All rights reserved.</p>
+            <p><small>&copy; 2026 StudentHub Portal. All rights reserved.</small></p>
         </footer>
     </center>
 
