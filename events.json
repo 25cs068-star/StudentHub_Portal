@@ -1,0 +1,107 @@
+[
+    {
+        "name": "Web Development Workshop",
+        "category": "Technical",
+        "date": "2026-10-08",
+        "venue": "Computer Lab",
+        "description": "Learn modern web development using HTML, CSS and JavaScript."
+    },
+    {
+        "name": "Coding Competition",
+        "category": "Technical",
+        "date": "2026-10-10",
+        "venue": "Seminar Hall",
+        "description": "Participate in an exciting programming and problem-solving competition."
+    },
+    {
+        "name": "Cultural Fest 2026",
+        "category": "Cultural",
+        "date": "2026-10-12",
+        "venue": "College Auditorium",
+        "description": "Enjoy music, dance, drama and other cultural performances."
+    },
+    {
+        "name": "Inter College Cricket Tournament",
+        "category": "Sports",
+        "date": "2026-10-15",
+        "venue": "College Ground",
+        "description": "Join the inter college cricket tournament and represent your department."
+    },
+    {
+        "name": "AI and Machine Learning Seminar",
+        "category": "Technical",
+        "date": "2026-10-18",
+        "venue": "Seminar Hall",
+        "description": "Explore the fundamentals and applications of artificial intelligence and machine learning."
+    },
+    {
+        "name": "Hackathon 2026",
+        "category": "Technical",
+        "date": "2026-10-20",
+        "venue": "Innovation Lab",
+        "description": "Build innovative solutions and compete with other student teams."
+    },
+    {
+        "name": "Career Guidance Seminar",
+        "category": "Technical",
+        "date": "2026-10-22",
+        "venue": "Main Auditorium",
+        "description": "Get useful guidance about careers, internships and future opportunities."
+    },
+    {
+        "name": "Annual Sports Day",
+        "category": "Sports",
+        "date": "2026-10-25",
+        "venue": "College Ground",
+        "description": "Participate in various sports activities and represent your department."
+    },
+    {
+        "name": "Photography Competition",
+        "category": "Cultural",
+        "date": "2026-10-27",
+        "venue": "Student Activity Center",
+        "description": "Show your creativity and photography skills in this student competition."
+    },
+    {
+        "name": "Robotics Workshop",
+        "category": "Technical",
+        "date": "2026-10-29",
+        "venue": "Robotics Lab",
+        "description": "Learn the basics of robotics and explore practical robotic applications."
+    },
+    {
+        "name": "Basketball Championship",
+        "category": "Sports",
+        "date": "2026-11-02",
+        "venue": "College Sports Complex",
+        "description": "Compete in the basketball championship and showcase your teamwork and skills."
+    },
+    {
+        "name": "Music Night",
+        "category": "Cultural",
+        "date": "2026-11-05",
+        "venue": "College Auditorium",
+        "description": "Enjoy an entertaining evening filled with music and student performances."
+    },
+    {
+        "name": "Cyber Security Awareness Seminar",
+        "category": "Technical",
+        "date": "2026-11-08",
+        "venue": "Seminar Hall",
+        "description": "Learn about cyber security, online safety and responsible digital practices."
+    },
+    {
+        "name": "Table Tennis Tournament",
+        "category": "Sports",
+        "date": "2026-11-12",
+        "venue": "Indoor Sports Hall",
+        "description": "Participate in the table tennis tournament and compete with fellow students."
+    },
+    {
+        "name": "Art and Drawing Competition",
+        "category": "Cultural",
+        "date": "2026-11-15",
+        "venue": "Student Activity Center",
+        "description": "Express your creativity through art, drawing and unique visual ideas."
+    }
+]

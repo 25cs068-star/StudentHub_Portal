@@ -1,0 +1,156 @@
+[
+    {
+        "id": 1,
+        "category": "Account",
+        "question": "How can I register on StudentHub?",
+        "answer": "Open the Register page, fill in your details and submit the registration form."
+    },
+    {
+        "id": 2,
+        "category": "Account",
+        "question": "How can I login to StudentHub?",
+        "answer": "Open the Login page and enter your registered email and password."
+    },
+    {
+        "id": 3,
+        "category": "Events",
+        "question": "How can I view college events?",
+        "answer": "Open the Events page to view all available college events."
+    },
+    {
+        "id": 4,
+        "category": "Events",
+        "question": "Can I search for an event?",
+        "answer": "Yes, use the search box on the Events page to search for events."
+    },
+    {
+        "id": 5,
+        "category": "Events",
+        "question": "Can I filter events by category?",
+        "answer": "Yes, events can be filtered using the category dropdown."
+    },
+    {
+        "id": 6,
+        "category": "Events",
+        "question": "Can I sort the events?",
+        "answer": "Yes, you can sort events by name or date."
+    },
+    {
+        "id": 7,
+        "category": "Events",
+        "question": "How many events are displayed on one page?",
+        "answer": "Six events are displayed on each page."
+    },
+    {
+        "id": 8,
+        "category": "Events",
+        "question": "How can I move to the next page of events?",
+        "answer": "Use the Next button in the pagination section."
+    },
+    {
+        "id": 9,
+        "category": "Events",
+        "question": "Can I go back to the previous event page?",
+        "answer": "Yes, use the Previous button in the pagination section."
+    },
+    {
+        "id": 10,
+        "category": "Profile",
+        "question": "Where can I view my profile?",
+        "answer": "Open the Profile page from the navigation menu."
+    },
+    {
+        "id": 11,
+        "category": "Support",
+        "question": "How can I contact StudentHub?",
+        "answer": "Open the Contact page to find the available contact information."
+    },
+    {
+        "id": 12,
+        "category": "Support",
+        "question": "Where can I find frequently asked questions?",
+        "answer": "Open the FAQ page to view commonly asked questions and answers."
+    },
+    {
+        "id": 13,
+        "category": "Support",
+        "question": "Can I submit feedback?",
+        "answer": "Yes, open the Feedback page and submit your feedback."
+    },
+    {
+        "id": 14,
+        "category": "General",
+        "question": "Is StudentHub available on mobile devices?",
+        "answer": "Yes, the StudentHub Portal is designed to work on different screen sizes."
+    },
+    {
+        "id": 15,
+        "category": "Events",
+        "question": "What information is available about events?",
+        "answer": "Event information includes the event name, category, date, venue and description."
+    },
+
+        
+    {
+        "id": 16,
+        "category": "Account",
+        "question": "Can I update my account information?",
+        "answer": "Yes, you can update your available profile information from the Profile page."
+    },
+    {
+        "id": 17,
+        "category": "Account",
+        "question": "What should I do if I forget my password?",
+        "answer": "Contact the StudentHub support team for assistance with your account."
+    },
+    {
+        "id": 18,
+        "category": "Profile",
+        "question": "What information is shown on my profile?",
+        "answer": "Your profile can include your name, enrollment details, department, year and other available information."
+    },
+    {
+        "id": 19,
+        "category": "Profile",
+        "question": "Can I view my department information?",
+        "answer": "Yes, your department information is available in your student profile."
+    },
+    {
+        "id": 20,
+        "category": "Events",
+        "question": "How can I find events by category?",
+        "answer": "Use the category filter on the Events page to find events belonging to a specific category."
+    },
+    {
+        "id": 21,
+        "category": "Events",
+        "question": "Can I search events using their name?",
+        "answer": "Yes, enter the event name or related keyword in the Events search box."
+    },
+    {
+        "id": 22,
+        "category": "Support",
+        "question": "How can I send feedback to StudentHub?",
+        "answer": "Open the Feedback page, enter your feedback and submit the form."
+    },
+    {
+        "id": 23,
+        "category": "Support",
+        "question": "Where can I get help with StudentHub?",
+        "answer": "You can use the Contact page to find available support information."
+    },
+    {
+        "id": 24,
+        "category": "General",
+        "question": "What is the purpose of StudentHub?",
+        "answer": "StudentHub provides students with a single portal to access useful academic, event and profile-related information."
+    },
+    {
+        "id": 25,
+        "category": "General",
+        "question": "Can I use StudentHub on different screen sizes?",
+        "answer": "Yes, the StudentHub Portal is designed to provide a responsive experience on different screen sizes."
+    }
+
+
+]

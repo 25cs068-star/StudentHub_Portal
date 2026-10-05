@@ -1,80 +1,561 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>StudentHub Portal - Feedback</title>
+
+    <link rel="stylesheet" href="csscommon.css">
+
+    <style>
+
+        /* ================= FEEDBACK PAGE ================= */
+
+        .feedback-container {
+            width: 95%;
+            max-width: 1250px;
+            margin: 35px auto;
+            display: grid;
+            gap: 30px;
+        }
+
+        .feedback-hero {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, .15);
+            transition: .3s;
+        }
+
+        .feedback-hero h2 {
+            font-size: 40px;
+            color: #003566;
+            margin-bottom: 10px;
+        }
+
+        .feedback-hero p {
+            font-size: 17px;
+            color: #555;
+        }
+
+        .feedback-card {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, .15);
+            transition: .3s;
+        }
+
+        .feedback-card h2 {
+            text-align: center;
+            color: #003566;
+            margin-bottom: 30px;
+            font-size: 30px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #003566;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 12px;
+            font-size: 16px;
+            border: 2px solid #d8d8d8;
+            border-radius: 10px;
+            outline: none;
+            transition: .3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #0077b6;
+            box-shadow: 0 0 8px rgba(0, 119, 182, .3);
+        }
+
+        .full-width {
+            grid-column: 1 / 3;
+        }
+
+        .form-group textarea {
+            height: 140px;
+            resize: none;
+        }
+
+        .option-box {
+            background: #f8fbff;
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 20px;
+            transition: .3s;
+        }
+
+        .option-box h3 {
+            margin-bottom: 15px;
+            color: #003566;
+        }
+
+        .option-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .option-row label {
+            font-weight: bold;
+        }
+
+        .option-row input {
+            margin-right: 5px;
+        }
+
+        .button-area {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .button-area input {
+            padding: 13px 35px;
+            font-size: 16px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: .3s;
+        }
+
+        input[type="submit"] {
+            background: #0077b6;
+            color: white;
+        }
+
+        input[type="submit"]:hover {
+            background: #003566;
+        }
+
+        input[type="reset"] {
+            background: #e53935;
+            color: white;
+        }
+
+        input[type="reset"]:hover {
+            background: #b71c1c;
+        }
+
+        /* ================= THANK YOU CARD ================= */
+
+        .thank-card {
+            background: linear-gradient(135deg, #003566, #0077b6, #00b4d8);
+            color: white;
+            padding: 35px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, .2);
+        }
+
+        .thank-card h2 {
+            font-size: 30px;
+            margin-bottom: 15px;
+        }
+
+        .thank-card p {
+            font-size: 17px;
+            line-height: 1.7;
+        }
+
+        .home-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 30px;
+            background: white;
+            color: #003566;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 30px;
+            transition: .3s;
+        }
+
+        .home-btn:hover {
+            background: #003566;
+            color: white;
+        }
+
+        /* ================= DARK MODE ================= */
+
+        body.dark-mode .feedback-hero,
+        body.dark-mode .feedback-card {
+            background: #1e1e1e;
+            color: #eeeeee;
+        }
+
+        body.dark-mode .feedback-hero h2,
+        body.dark-mode .feedback-card h2,
+        body.dark-mode .form-group label,
+        body.dark-mode .option-box h3 {
+            color: #00b4d8;
+        }
+
+        body.dark-mode .feedback-hero p {
+            color: #cccccc;
+        }
+
+        body.dark-mode .option-box {
+            background: #292929;
+            color: #eeeeee;
+        }
+
+        body.dark-mode .form-group input,
+        body.dark-mode .form-group select,
+        body.dark-mode .form-group textarea {
+            background: #252525;
+            color: white;
+            border-color: #555;
+        }
+
+        body.dark-mode .form-group input::placeholder,
+        body.dark-mode .form-group textarea::placeholder {
+            color: #bbbbbb;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media(max-width: 900px) {
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .full-width {
+                grid-column: 1;
+            }
+
+        }
+
+        @media(max-width: 768px) {
+
+            .feedback-container {
+                width: 92%;
+                margin: 25px auto;
+            }
+
+            .feedback-hero {
+                padding: 25px 15px;
+            }
+
+            .feedback-hero h2 {
+                font-size: 30px;
+            }
+
+            .feedback-card {
+                padding: 25px 18px;
+            }
+
+            .feedback-card h2 {
+                font-size: 25px;
+            }
+
+            .option-row {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .button-area {
+                flex-direction: column;
+            }
+
+            .button-area input {
+                width: 100%;
+            }
+
+        }
+
+    </style>
+
 </head>
+
 <body>
 
-    <center>
-        <header>
-            <br>
-            <img src="logo.jfif" alt="StudentHub Portal Logo" width="150" height="150">
+    <header>
+
+        <div class="logo-section">
+
+            <img src="logo.jfif" alt="StudentHub Logo">
+
             <h1>StudentHub Portal</h1>
+
             <p>Your Digital Campus and Academic Companion</p>
-            <hr width="80%">
-            
-            <nav aria-label="Main Navigation">
-                <a href="index.html">Home</a> | 
-                <a href="about.html">About</a> | 
-                <a href="register.html">Register</a> | 
-                <a href="login.html">Login</a> | 
-                <a href="dashboard.html">Dashboard</a> | 
-                <a href="events.html">Events</a> | 
-                <a href="profile.html">Profile</a> | 
-                <a href="contact.html">Contact</a> | 
-                <a href="faq.html">FAQ</a> | 
-                <a href="feedback.html">Feedback</a>
-            </nav>
-            <hr width="80%">
-        </header>
 
-        <main>
-            <section>
-                <h2>Student Feedback</h2>
-                <p>We value your suggestions and feedback to improve our campus portal.</p>
-                <br>
-                <hr width="60%">
-            </section>
+        </div>
 
-            <section>
-                <h2>Feedback Form</h2>
-               
-                <form action="#" novalidate>
-                    <p><b>Your Name:</b></p>
-                    <p><input type="text" name="fullname" placeholder="Enter your name"></p>
+        <button type="button" id="themeToggle" class="theme-btn">
+            🌙 Dark Mode
+        </button>
 
-                    <p><b>Email Address:</b></p>
-                    <p><input type="text" name="email" placeholder="Enter your email"></p>
+        <button type="button" id="menuToggle" class="menu-btn">
+            ☰
+        </button>
 
-                    <p><b>Category:</b></p>
-                    <p>
-                        <select name="category">
-                            <option value="general">General Suggestion</option>
-                            <option value="website">Website Improvement</option>
-                            <option value="academic">Academic Services</option>
+        <nav>
+
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="register.html">Register</a>
+            <a href="login.html">Login</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="events.html">Events</a>
+            <a href="profile.html">Profile</a>
+            <a href="contact.html">Contact</a>
+            <a href="faq.html">FAQ</a>
+            <a href="feedback.html">Feedback</a>
+
+        </nav>
+
+    </header>
+
+
+    <main class="feedback-container">
+
+        <section class="feedback-hero">
+
+            <h2>💬 We Value Your Feedback</h2>
+
+            <p>
+                Help us improve StudentHub Portal by sharing your experience and suggestions.
+            </p>
+
+        </section>
+
+
+        <section class="feedback-card">
+
+            <h2>Student Feedback Form</h2>
+
+            <form>
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+
+                        <label>👤 Full Name</label>
+
+                        <input
+                            type="text"
+                            placeholder="Enter Your Name">
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>📧 Email Address</label>
+
+                        <input
+                            type="email"
+                            placeholder="student@example.com">
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>📚 Feedback Category</label>
+
+                        <select>
+
+                            <option>Select Category</option>
+                            <option>Website Design</option>
+                            <option>Academic Services</option>
+                            <option>Campus Events</option>
+                            <option>Technical Issue</option>
+                            <option>General Suggestion</option>
+
                         </select>
-                    </p>
 
-                    <p><b>Your Feedback / Comments:</b></p>
-                    <p><textarea name="comments" rows="4" cols="30" placeholder="Type your feedback here"></textarea></p>
+                    </div>
 
-                    <br>
-                    <p>
-                        <input type="submit" value="Submit Feedback">
-                        <input type="reset" value="Clear">
-                    </p>
-                </form>
-                <br>
-                <hr width="80%">
-            </section>
-        </main>
 
-        <footer>
-            <p>&copy; 2026 StudentHub Portal. All rights reserved.</p>
-        </footer>
-    </center>
+                    <div class="form-group">
+
+                        <label>🎓 Enrollment Number</label>
+
+                        <input
+                            type="text"
+                            placeholder="Enter Enrollment Number">
+
+                    </div>
+
+
+                    <div class="form-group full-width">
+
+                        <label>💡 Suggestions / Comments</label>
+
+                        <textarea
+                            placeholder="Write your valuable feedback here..."></textarea>
+
+                    </div>
+
+                </div>
+
+
+                <div class="option-box">
+
+                    <h3>⭐ Rate Your Experience</h3>
+
+                    <div class="option-row">
+
+                        <label>
+                            <input type="radio" name="rate">
+                            Excellent
+                        </label>
+
+                        <label>
+                            <input type="radio" name="rate">
+                            Good
+                        </label>
+
+                        <label>
+                            <input type="radio" name="rate">
+                            Average
+                        </label>
+
+                        <label>
+                            <input type="radio" name="rate">
+                            Poor
+                        </label>
+
+                    </div>
+
+                </div>
+
+
+                <div class="option-box">
+
+                    <h3>👍 Would you recommend StudentHub?</h3>
+
+                    <div class="option-row">
+
+                        <label>
+                            <input type="radio" name="recommend">
+                            Yes
+                        </label>
+
+                        <label>
+                            <input type="radio" name="recommend">
+                            Maybe
+                        </label>
+
+                        <label>
+                            <input type="radio" name="recommend">
+                            No
+                        </label>
+
+                    </div>
+
+                </div>
+
+
+                <div class="option-box">
+
+                    <h3>❤️ Which feature do you use the most?</h3>
+
+                    <div class="option-row">
+
+                        <label>
+                            <input type="checkbox">
+                            Dashboard
+                        </label>
+
+                        <label>
+                            <input type="checkbox">
+                            Events
+                        </label>
+
+                        <label>
+                            <input type="checkbox">
+                            Profile
+                        </label>
+
+                        <label>
+                            <input type="checkbox">
+                            Notices
+                        </label>
+
+                        <label>
+                            <input type="checkbox">
+                            Registration
+                        </label>
+
+                    </div>
+
+                </div>
+
+
+                <div class="button-area">
+
+                    <input
+                        type="submit"
+                        value="Submit Feedback">
+
+                    <input
+                        type="reset"
+                        value="Clear Form">
+
+                </div>
+
+            </form>
+
+        </section>
+
+
+        <section class="thank-card">
+
+            <h2>🌟 Thank You!</h2>
+
+            <p>
+                Every suggestion helps us make StudentHub Portal better for all students.
+            </p>
+
+            <a href="index.html" class="home-btn">
+                🏠 Back to Home
+            </a>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+
+        <p>
+            &copy; 2026 StudentHub Portal | Designed for Students
+        </p>
+
+    </footer>
+
+
+    <script src="scriptcomman.js"></script>
 
 </body>
+
 </html>

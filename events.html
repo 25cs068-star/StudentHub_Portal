@@ -1,109 +1,1179 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StudentHub Portal - Events</title>
+    <title>StudentHub - Events</title>
+    <link rel="stylesheet" href="csscommon.css">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+        }
+
+        .events-container {
+            width: 100%;
+            padding: 16px 28px 30px;
+        }
+
+        .events-hero {
+            width: 100%;
+            min-height: 235px;
+            padding: 28px 38px;
+            margin-bottom: 18px;
+            border-radius: 22px;
+            display: grid;
+            grid-template-columns: 1.45fr 1fr;
+            align-items: center;
+            gap: 30px;
+            color: white;
+            background:
+                radial-gradient(circle at 92% 15%, rgba(255,255,255,.14) 0 85px, transparent 86px),
+                linear-gradient(120deg, #003566, #0077b6 55%, #00a8c7);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 8px 22px rgba(0,67,110,.18);
+        }
+
+        .events-hero::before {
+            content: "";
+            position: absolute;
+            width: 280px;
+            height: 280px;
+            border: 55px solid rgba(255,255,255,.045);
+            border-radius: 50%;
+            right: -130px;
+            bottom: -190px;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 6px 12px;
+            margin-bottom: 12px;
+            border-radius: 20px;
+            background: rgba(255,255,255,.13);
+            border: 1px solid rgba(255,255,255,.2);
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        .events-hero h2 {
+            margin: 0 0 9px;
+            font-size: 37px;
+            line-height: 1.1;
+            letter-spacing: -.5px;
+        }
+
+        .events-hero p {
+            max-width: 650px;
+            margin: 0;
+            color: #e8f8ff;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .hero-stats {
+            position: relative;
+            z-index: 2;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .hero-stat {
+            min-height: 82px;
+            padding: 15px;
+            border-radius: 15px;
+            background: rgba(255,255,255,.11);
+            border: 1px solid rgba(255,255,255,.2);
+            backdrop-filter: blur(8px);
+            transition: .25s;
+        }
+
+        .hero-stat:hover {
+            transform: translateY(-3px);
+            background: rgba(255,255,255,.16);
+        }
+
+        .hero-stat strong {
+            display: block;
+            font-size: 23px;
+            margin-bottom: 3px;
+        }
+
+        .hero-stat span {
+            color: #e8f8ff;
+            font-size: 10px;
+        }
+
+        .filter-box {
+            width: 100%;
+            padding: 19px 22px;
+            margin-bottom: 21px;
+            border-radius: 19px;
+            background: white;
+            border: 1px solid #e3edf2;
+            box-shadow: 0 6px 18px rgba(0,0,0,.08);
+        }
+
+        .filter-title {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 14px;
+        }
+
+        .filter-title-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .filter-icon {
+            width: 38px;
+            height: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 11px;
+            background: #e9f8fc;
+            font-size: 18px;
+        }
+
+        .filter-title h3 {
+            margin: 0;
+            color: #003566;
+            font-size: 19px;
+        }
+
+        .filter-title p {
+            margin: 2px 0 0;
+            color: #777;
+            font-size: 10px;
+        }
+
+        .filter-badge {
+            padding: 6px 11px;
+            border-radius: 20px;
+            background: #e9f8fc;
+            color: #0077b6;
+            font-size: 10px;
+            font-weight: bold;
+        }
+
+        .filter-row {
+            display: grid;
+            grid-template-columns: 1.4fr 1fr 1fr;
+            gap: 12px;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .filter-group label {
+            color: #003566;
+            font-size: 10px;
+            font-weight: bold;
+        }
+
+        .input-wrap {
+            position: relative;
+        }
+
+        .input-wrap span {
+            position: absolute;
+            left: 11px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 13px;
+        }
+
+        .filter-group input,
+        .filter-group select {
+            width: 100%;
+            height: 38px;
+            padding: 8px 11px;
+            border: 1px solid #d5e0e6;
+            border-radius: 9px;
+            background: #fbfdff;
+            color: #333;
+            font-size: 11px;
+            outline: none;
+        }
+
+        .input-wrap input {
+            padding-left: 34px;
+        }
+
+        .filter-group input:focus,
+        .filter-group select:focus {
+            border-color: #00a8d0;
+            box-shadow: 0 0 0 3px rgba(0,168,208,.07);
+        }
+
+        .date-filter {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 11px;
+        }
+
+        .section-heading,
+        .result-heading {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+
+        .heading-label {
+            margin-bottom: 3px;
+            color: #0077b6;
+            font-size: 10px;
+            font-weight: bold;
+        }
+
+        .section-heading h2,
+        .result-heading h2 {
+            margin: 0 0 3px;
+            color: #003566;
+            font-size: 23px;
+        }
+
+        .section-heading p,
+        .result-label {
+            margin: 0;
+            color: #666;
+            font-size: 11px;
+        }
+
+        .heading-arrow {
+            width: 38px;
+            height: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: #e9f8fc;
+            color: #0077b6;
+            font-size: 19px;
+        }
+
+        .featured-section {
+            margin-bottom: 22px;
+        }
+
+        .featured-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+
+        .featured-card {
+            min-height: 150px;
+            padding: 16px;
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 12px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 16px;
+            background: white;
+            border: 1px solid #e2ebef;
+            box-shadow: 0 6px 17px rgba(0,0,0,.07);
+            transition: .25s;
+        }
+
+        .featured-card::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg,#003566,#00b4d8);
+        }
+
+        .featured-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0,80,130,.13);
+        }
+
+        .featured-card::after {
+            content: "";
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            right: -35px;
+            bottom: -40px;
+            border-radius: 50%;
+            background: #effaff;
+        }
+
+        .featured-icon {
+            width: 47px;
+            height: 47px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 13px;
+            background: linear-gradient(145deg,#e6f7fc,#f5fcfe);
+            font-size: 21px;
+        }
+
+        .featured-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .featured-category {
+            display: inline-block;
+            padding: 3px 7px;
+            border-radius: 5px;
+            background: #e9f8fc;
+            color: #0077b6;
+            font-size: 8px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .featured-content h3 {
+            margin: 6px 0;
+            color: #003566;
+            font-size: 15px;
+            line-height: 1.3;
+        }
+
+        .featured-content p {
+            margin: 0 0 8px;
+            color: #666;
+            font-size: 10px;
+            line-height: 1.45;
+        }
+
+        .featured-info {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .featured-info span {
+            color: #555;
+            font-size: 9px;
+        }
+
+        .upcoming-section {
+            margin-top: 0;
+        }
+
+        .result-info {
+            padding: 6px 10px;
+            border-radius: 18px;
+            background: #e9f8fc;
+            color: #0077b6;
+            font-size: 10px;
+            font-weight: bold;
+        }
+
+        .event-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+
+        .event-card {
+            padding: 17px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 17px;
+            background: white;
+            border: 1px solid #e2ebef;
+            box-shadow: 0 6px 17px rgba(0,0,0,.07);
+            transition: .25s;
+        }
+
+        .event-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg,#003566,#0077b6,#00b4d8);
+        }
+
+        .event-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 27px rgba(0,80,130,.13);
+        }
+
+        .card-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 11px;
+        }
+
+        .event-icon {
+            width: 47px;
+            height: 47px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 13px;
+            background: #e9f8fc;
+            font-size: 21px;
+        }
+
+        .event-number {
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: #f1f5f7;
+            color: #0077b6;
+            font-size: 10px;
+            font-weight: bold;
+        }
+
+        .event-date {
+            display: inline-block;
+            padding: 5px 8px;
+            margin-bottom: 7px;
+            border-radius: 7px;
+            background: #eaf8fc;
+            color: #0077b6;
+            font-size: 9px;
+            font-weight: bold;
+        }
+
+        .event-card h3 {
+            margin: 0 0 7px;
+            color: #003566;
+            font-size: 15px;
+            line-height: 1.35;
+        }
+
+        .event-description {
+            min-height: 42px;
+            margin: 0 0 9px;
+            color: #666;
+            font-size: 10px;
+            line-height: 1.5;
+        }
+
+        .event-info {
+            padding-top: 7px;
+            border-top: 1px solid #e7edf0;
+        }
+
+        .event-info p {
+            margin: 4px 0;
+            color: #555;
+            font-size: 10px;
+        }
+
+        .message {
+            grid-column: 1 / -1;
+            padding: 40px 20px;
+            text-align: center;
+            border-radius: 17px;
+            background: white;
+            box-shadow: 0 6px 17px rgba(0,0,0,.07);
+        }
+
+        .message h3 {
+            margin-bottom: 6px;
+            color: #003566;
+        }
+
+        .message p {
+            margin: 0;
+            color: #666;
+            font-size: 11px;
+        }
+
+        #pagination {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin: 18px 0;
+        }
+
+        #pagination button {
+            min-width: 35px;
+            height: 35px;
+            padding: 0 11px;
+            border: none;
+            border-radius: 8px;
+            background: #0077b6;
+            color: white;
+            font-size: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: .2s;
+        }
+
+        #pagination button:hover {
+            background: #003566;
+            transform: translateY(-2px);
+        }
+
+        #pagination button.active {
+            background: #003566;
+        }
+
+        #pagination button:disabled {
+            background: #aeb8bd;
+            cursor: not-allowed;
+        }
+
+        .guidelines {
+            padding: 19px 22px;
+            margin-top: 20px;
+            border-radius: 17px;
+            background: white;
+            box-shadow: 0 6px 17px rgba(0,0,0,.07);
+        }
+
+        .guidelines-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .guidelines-icon {
+            width: 37px;
+            height: 37px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            background: #e9f8fc;
+        }
+
+        .guidelines h3 {
+            margin: 0;
+            color: #003566;
+            font-size: 17px;
+        }
+
+        .guidelines ul {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5px 25px;
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .guidelines li {
+            color: #666;
+            font-size: 10px;
+            line-height: 1.5;
+        }
+
+        body.dark-mode .filter-box,
+        body.dark-mode .featured-card,
+        body.dark-mode .event-card,
+        body.dark-mode .message,
+        body.dark-mode .guidelines {
+            background: #1e1e1e;
+            border-color: #333;
+        }
+
+        body.dark-mode .filter-title h3,
+        body.dark-mode .section-heading h2,
+        body.dark-mode .result-heading h2,
+        body.dark-mode .featured-content h3,
+        body.dark-mode .event-card h3,
+        body.dark-mode .message h3,
+        body.dark-mode .guidelines h3 {
+            color: #00b4d8;
+        }
+
+        body.dark-mode .filter-title p,
+        body.dark-mode .section-heading p,
+        body.dark-mode .result-label,
+        body.dark-mode .featured-content p,
+        body.dark-mode .featured-info span,
+        body.dark-mode .event-description,
+        body.dark-mode .event-info p,
+        body.dark-mode .message p,
+        body.dark-mode .guidelines li {
+            color: #ccc;
+        }
+
+        body.dark-mode .filter-group label {
+            color: #00b4d8;
+        }
+
+        body.dark-mode .filter-group input,
+        body.dark-mode .filter-group select {
+            background: #292929;
+            color: white;
+            border-color: #444;
+        }
+
+        body.dark-mode .featured-icon,
+        body.dark-mode .event-icon {
+            background: #173746;
+        }
+
+        body.dark-mode .event-number {
+            background: #292929;
+        }
+
+        body.dark-mode .event-info {
+            border-color: #444;
+        }
+
+        body.dark-mode .guidelines-icon {
+            background: #173746;
+        }
+
+        @media (max-width: 1100px) {
+            .featured-grid,
+            .event-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 900px) {
+            .events-hero {
+                grid-template-columns: 1fr;
+            }
+
+            .filter-row {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .filter-group:first-child {
+                grid-column: 1 / -1;
+            }
+        }
+
+        @media (max-width: 650px) {
+            .events-container {
+                padding: 12px 14px 25px;
+            }
+
+            .events-hero {
+                padding: 25px 20px;
+                border-radius: 18px;
+            }
+
+            .events-hero h2 {
+                font-size: 30px;
+            }
+
+            .hero-stats {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .filter-box {
+                padding: 17px;
+            }
+
+            .filter-badge {
+                display: none;
+            }
+
+            .filter-row,
+            .date-filter {
+                grid-template-columns: 1fr;
+            }
+
+            .filter-group:first-child {
+                grid-column: auto;
+            }
+
+            .featured-grid,
+            .event-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-heading,
+            .result-heading {
+                align-items: flex-start;
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .guidelines ul {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
+
 <body>
 
-    <center>
-       
-        <header>
-            <br>
-            <img src="logo.jfif" alt="StudentHub Portal Logo" width="130" height="130">
-            <h1>StudentHub Portal</h1>
-            <p>Your Digital Campus and Academic Companion</p>
-            <hr width="85%">
-            
-            <nav aria-label="Main Navigation">
-                <a href="index.html">Home</a> | 
-                <a href="about.html">About</a> | 
-                <a href="register.html">Register</a> | 
-                <a href="login.html">Login</a> | 
-                <a href="dashboard.html">Dashboard</a> | 
-                <a href="events.html"><b><u>Events</u></b></a> | 
-                <a href="profile.html">Profile</a> | 
-                <a href="contact.html">Contact</a> | 
-                <a href="faq.html">FAQ</a> | 
-                <a href="feedback.html">Feedback</a>
-            </nav>
-            <hr width="85%">
-        </header>
+    <header>
 
-        
-        <main style="width: 85%;">
-            <br>
-            
-            
-            <table border="0" width="100%">
-                <tr>
-                    <td align="left">
-                        <h2>Upcoming Campus Events</h2>
-                        <p>Stay updated with the latest events happening on campus.</p>
-                    </td>
-                </tr>
-            </table>
-            <br>
+        <button id="themeToggle" class="theme-btn" type="button">
+            🌙 Dark Mode
+        </button>
 
-           
-            <table border="1" cellpadding="12" cellspacing="0" width="100%">
-                <tr>
-                    
-                    <td width="33%" valign="top">
-                        <h3>1. Annual Tech Fest</h3>
-                        <hr>
-                        <p><b>Category:</b> Technical</p>
-                        <p><b>Date:</b> 15th March</p>
-                        <p><b>Venue:</b> Main Auditorium</p>
-                    </td>
+        <button id="menuToggle" class="menu-btn" type="button">
+            ☰
+        </button>
 
-                   
-                    <td width="33%" valign="top">
-                        <h3>2. Cultural Evening</h3>
-                        <hr>
-                        <p><b>Category:</b> Cultural</p>
-                        <p><b>Date:</b> 22nd March</p>
-                        <p><b>Venue:</b> Campus Ground</p>
-                    </td>
+        <div class="logo-section">
 
-                    
-                    <td width="33%" valign="top">
-                        <h3>3. Sports Meet</h3>
-                        <hr>
-                        <p><b>Category:</b> Sports</p>
-                        <p><b>Date:</b> 05th April</p>
-                        <p><b>Venue:</b> Sports Complex</p>
-                    </td>
-                </tr>
-            </table>
+            <img src="logo.jfif" alt="StudentHub Logo">
 
-            <br><br>
+            <h1>StudentHub</h1>
 
-           
-            <table border="1" cellpadding="12" cellspacing="0" width="100%">
-                <tr>
-                    <td>
-                        <h3>Event Guidelines</h3>
-                        <hr>
-                        <ul type="disc">
-                            <li>Carry your Student ID card for entry.</li>
-                            <li>Register before the event date.</li>
-                            <li>Maintain discipline on campus.</li>
-                        </ul>
-                    </td>
-                </tr>
-            </table>
+            <p>Student Portal</p>
 
-            <br>
-            <hr width="100%">
-        </main>
+        </div>
 
-        
-        <footer>
-            <p><small>&copy; 2026 StudentHub Portal. All rights reserved.</small></p>
-        </footer>
-    </center>
+        <nav>
+
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="register.html">Register</a>
+            <a href="login.html">Login</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="events.html">Events</a>
+            <a href="profile.html">Profile</a>
+            <a href="contact.html">Contact</a>
+            <a href="faq.html">FAQ</a>
+            <a href="feedback.html">Feedback</a>
+
+        </nav>
+
+    </header>
+
+    <main class="events-container">
+
+        <section class="events-hero">
+
+            <div class="hero-content">
+
+                <span class="hero-badge">
+                    🎓 StudentHub Events
+                </span>
+
+                <h2>
+                    Discover What's Happening
+                </h2>
+
+                <p>
+                    Explore workshops, technical competitions,
+                    cultural activities, sports and other exciting
+                    opportunities happening across your campus.
+                </p>
+
+            </div>
+
+            <div class="hero-stats">
+
+                <div class="hero-stat">
+                    <strong>09+</strong>
+                    <span>Upcoming Events</span>
+                </div>
+
+                <div class="hero-stat">
+                    <strong>03</strong>
+                    <span>Categories</span>
+                </div>
+
+                <div class="hero-stat">
+                    <strong>06</strong>
+                    <span>Events Per Page</span>
+                </div>
+
+                <div class="hero-stat">
+                    <strong>2026</strong>
+                    <span>Academic Year</span>
+                </div>
+
+            </div>
+
+        </section>
+
+        <section class="filter-box">
+
+            <div class="filter-title">
+
+                <div class="filter-title-left">
+
+                    <div class="filter-icon">
+                        🔎
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Find Your Event
+                        </h3>
+
+                        <p>
+                            Search, filter and discover campus events
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <span class="filter-badge">
+                    Search & Filter
+                </span>
+
+            </div>
+
+            <div class="filter-row">
+
+                <div class="filter-group">
+
+                    <label for="searchInput">
+                        Search Events
+                    </label>
+
+                    <div class="input-wrap">
+
+                        <span>🔍</span>
+
+                        <input
+                            type="text"
+                            id="searchInput"
+                            placeholder="Search by event name, venue or topic..."
+                        >
+
+                    </div>
+
+                </div>
+
+                <div class="filter-group">
+
+                    <label for="categoryFilter">
+                        Category
+                    </label>
+
+                    <select id="categoryFilter">
+
+                        <option value="all">
+                            All Categories
+                        </option>
+
+                        <option value="Technical">
+                            Technical
+                        </option>
+
+                        <option value="Cultural">
+                            Cultural
+                        </option>
+
+                        <option value="Sports">
+                            Sports
+                        </option>
+
+                    </select>
+
+                </div>
+
+                <div class="filter-group">
+
+                    <label for="sortSelect">
+                        Sort By
+                    </label>
+
+                    <select id="sortSelect">
+
+                        <option value="dateAsc">
+                            Date - Earliest First
+                        </option>
+
+                        <option value="dateDesc">
+                            Date - Latest First
+                        </option>
+
+                        <option value="nameAsc">
+                            Name - A to Z
+                        </option>
+
+                        <option value="nameDesc">
+                            Name - Z to A
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+            <div class="date-filter">
+
+                <div class="filter-group">
+
+                    <label for="fromDate">
+                        From Date
+                    </label>
+
+                    <input
+                        type="date"
+                        id="fromDate"
+                    >
+
+                </div>
+
+                <div class="filter-group">
+
+                    <label for="toDate">
+                        To Date
+                    </label>
+
+                    <input
+                        type="date"
+                        id="toDate"
+                    >
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <section class="featured-section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <div class="heading-label">
+                        ✨ FEATURED EVENTS
+                    </div>
+
+                    <h2>
+                        Don't Miss These Events
+                    </h2>
+
+                    <p>
+                        Some popular events are waiting for you.
+                    </p>
+
+                </div>
+
+                <div class="heading-arrow">
+                    →
+                </div>
+
+            </div>
+
+            <div class="featured-grid">
+
+                <div class="featured-card">
+
+                    <div class="featured-icon">
+                        💻
+                    </div>
+
+                    <div class="featured-content">
+
+                        <span class="featured-category">
+                            Technical
+                        </span>
+
+                        <h3>
+                            Web Development Workshop
+                        </h3>
+
+                        <p>
+                            Learn modern web development with practical
+                            HTML, CSS and JavaScript activities.
+                        </p>
+
+                        <div class="featured-info">
+
+                            <span>
+                                📅 08 Oct 2026
+                            </span>
+
+                            <span>
+                                📍 Computer Lab
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="featured-card">
+
+                    <div class="featured-icon">
+                        🏆
+                    </div>
+
+                    <div class="featured-content">
+
+                        <span class="featured-category">
+                            Sports
+                        </span>
+
+                        <h3>
+                            Inter College Cricket Tournament
+                        </h3>
+
+                        <p>
+                            Participate with your team and compete
+                            against students from different colleges.
+                        </p>
+
+                        <div class="featured-info">
+
+                            <span>
+                                📅 15 Oct 2026
+                            </span>
+
+                            <span>
+                                📍 College Ground
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="featured-card">
+
+                    <div class="featured-icon">
+                        🎭
+                    </div>
+
+                    <div class="featured-content">
+
+                        <span class="featured-category">
+                            Cultural
+                        </span>
+
+                        <h3>
+                            Cultural Fest 2026
+                        </h3>
+
+                        <p>
+                            Enjoy music, dance, drama and exciting
+                            performances by student artists.
+                        </p>
+
+                        <div class="featured-info">
+
+                            <span>
+                                📅 12 Oct 2026
+                            </span>
+
+                            <span>
+                                📍 College Auditorium
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <section class="upcoming-section">
+
+            <div class="result-heading">
+
+                <div>
+
+                    <h2>
+                        Upcoming Events
+                    </h2>
+
+                    <span class="result-label">
+                        Explore all available events
+                    </span>
+
+                </div>
+
+                <div id="resultInfo" class="result-info"></div>
+
+            </div>
+
+            <section
+                id="eventsContainer"
+                class="event-grid">
+            </section>
+
+            <div id="pagination"></div>
+
+        </section>
+
+        <section class="guidelines">
+
+            <div class="guidelines-header">
+
+                <div class="guidelines-icon">
+                    ℹ️
+                </div>
+
+                <h3>
+                    Event Guidelines
+                </h3>
+
+            </div>
+
+            <ul>
+
+                <li>
+                    Register before the event registration deadline.
+                </li>
+
+                <li>
+                    Carry your student ID card during events.
+                </li>
+
+                <li>
+                    Follow instructions given by event organizers.
+                </li>
+
+                <li>
+                    Maintain discipline and respect other participants.
+                </li>
+
+            </ul>
+
+        </section>
+
+    </main>
+
+    <footer>
+
+        <p>
+            © 2026 StudentHub. All Rights Reserved.
+        </p>
+
+    </footer>
+
+    <script src="scriptcomman.js"></script>
+    <script src="events.js"></script>
 
 </body>
+
 </html>

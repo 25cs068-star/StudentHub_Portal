@@ -1,101 +1,378 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>StudentHub Portal - Login</title>
+
+    <link rel="stylesheet" href="csscommon.css">
+
+    <style>
+
+        /* ================= LOGIN PAGE ================= */
+
+        .login-container {
+            width: 95%;
+            max-width: 1100px;
+            margin: 35px auto;
+            display: grid;
+            gap: 30px;
+        }
+
+        .login-hero {
+            background: white;
+            padding: 35px;
+            text-align: center;
+            border-radius: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, .15);
+        }
+
+        .login-hero h2 {
+            font-size: 36px;
+            color: #003566;
+            margin-bottom: 10px;
+        }
+
+        .login-hero p {
+            font-size: 17px;
+            color: #555;
+        }
+
+        .login-card {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, .15);
+            max-width: 750px;
+            margin: auto;
+        }
+
+        .login-card form {
+            display: grid;
+            gap: 20px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 220px 1fr;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .form-row label {
+            font-weight: bold;
+            font-size: 17px;
+            color: #003566;
+        }
+
+        .form-row input,
+        .form-row select {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            border: 2px solid #d5dce3;
+            border-radius: 10px;
+            outline: none;
+            transition: .3s;
+        }
+
+        .form-row input:focus,
+        .form-row select:focus {
+            border-color: #0077b6;
+            box-shadow: 0 0 8px rgba(0, 119, 182, .3);
+        }
+
+        .option-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .option-row a {
+            text-decoration: none;
+            color: #0077b6;
+            font-weight: bold;
+        }
+
+        .option-row a:hover {
+            text-decoration: underline;
+        }
+
+        .button-area {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 15px;
+        }
+
+        .button-area input {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: .3s;
+        }
+
+        input[type="submit"] {
+            background: #0077b6;
+            color: white;
+        }
+
+        input[type="submit"]:hover {
+            background: #003566;
+        }
+
+        input[type="reset"] {
+            background: #e53935;
+            color: white;
+        }
+
+        input[type="reset"]:hover {
+            background: #b71c1c;
+        }
+
+        .need-account {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, .15);
+            text-align: center;
+            max-width: 750px;
+            margin: auto;
+        }
+
+        .need-account h2 {
+            color: #003566;
+            margin-bottom: 15px;
+        }
+
+        .need-account a {
+            text-decoration: none;
+            color: #0077b6;
+            font-weight: bold;
+        }
+
+        .need-account a:hover {
+            text-decoration: underline;
+        }
+
+        /* ================= LOGIN DARK MODE ================= */
+
+        body.dark-mode .login-hero,
+        body.dark-mode .login-card,
+        body.dark-mode .need-account {
+            background: #1e1e1e;
+            color: white;
+        }
+
+        body.dark-mode .login-hero h2,
+        body.dark-mode .need-account h2,
+        body.dark-mode .form-row label {
+            color: #00b4d8;
+        }
+
+        body.dark-mode .login-hero p {
+            color: #ddd;
+        }
+
+        body.dark-mode .form-row input,
+        body.dark-mode .form-row select {
+            background: #292929;
+            color: white;
+            border-color: #555;
+        }
+
+        body.dark-mode .option-row {
+            color: white;
+        }
+
+        /* ================= LOGIN MOBILE ================= */
+
+        @media(max-width: 768px) {
+
+            .login-container {
+                width: 95%;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+
+            .option-row {
+                flex-direction: column;
+                gap: 10px;
+                align-items: flex-start;
+            }
+
+            .button-area {
+                flex-direction: column;
+            }
+
+            .button-area input {
+                width: 100%;
+            }
+
+        }
+
+    </style>
+
 </head>
+
 <body>
 
-    <center>
-        <header>
-            <br>
-            <img src="logo.jfif" alt="StudentHub Portal Logo" width="150" height="150">
+    <header>
+
+        <div class="logo-section">
+
+            <img src="logo.jfif" alt="StudentHub Logo">
+
             <h1>StudentHub Portal</h1>
+
             <p>Your Digital Campus and Academic Companion</p>
-            <hr width="80%">
-            
-            <nav aria-label="Main Navigation">
-                <a href="index.html">Home</a> | 
-                <a href="about.html">About</a> | 
-                <a href="register.html">Register</a> | 
-                <a href="login.html">Login</a> | 
-                <a href="dashboard.html">Dashboard</a> | 
-                <a href="events.html">Events</a> | 
-                <a href="profile.html">Profile</a> | 
-                <a href="contact.html">Contact</a> | 
-                <a href="faq.html">FAQ</a> | 
-                <a href="feedback.html">Feedback</a>
-            </nav>
-            <hr width="80%">
-        </header>
 
-        <main>
-            <section>
-                <h2>User Login</h2>
-                <p>Please select your role and enter your credentials to access your account.</p>
-                <br>
-                <hr width="60%">
-            </section>
+        </div>
 
-            <section>
-                <h2>Login Instructions</h2>
-                <ul type="none">
-                    <li><b>Students:</b> Use your official Enrollment Number as your Username.</li>
-                    <li><b>Administrators:</b> Use your assigned Institutional ID to log in.</li>
-                    <li>Ensure caps lock is turned off while typing your password.</li>
-                </ul>
-                <br>
-                <hr width="60%">
-            </section>
+        <button id="themeToggle" class="theme-btn" type="button">
+            🌙 Dark Mode
+        </button>
 
-            <section>
-                <h2>Login Form</h2>
-                
-                <form action="#" novalidate>
-                    <table border="0" cellpadding="8" width="40%">
-                        <tr>
-                            <td align="right" width="40%"><b>User Role:</b></td>
-                            <td align="left" width="60%">
-                                <select name="role">
-                                    <option value="student">Student</option>
-                                    <option value="admin">Administrator</option>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td align="right"><b>Enrollment No / ID:</b></td>
-                            <td align="left"><input type="text" name="username" placeholder="Enter ID or Enrollment"></td>
-                        </tr>
-                        <tr>
-                            <td align="right"><b>Password:</b></td>
-                            <td align="left"><input type="password" name="password" placeholder="Enter password"></td>
-                        </tr>
-                        <tr>
-                            <td colspan="2" align="center">
-                                <br>
-                                <input type="submit" value="Login">
-                                <input type="reset" value="Clear">
-                            </td>
-                        </tr>
-                    </table>
-                </form>
-                <br>
-                <hr width="60%">
-            </section>
+        <button id="menuToggle" class="menu-btn" type="button">
+            ☰
+        </button>
 
-            <section>
-                <h2>Need an Account?</h2>
-                <p>New user? Create an account on the <a href="register.html">Register Page</a>.</p>
-                <br>
-                <hr width="80%">
-            </section>
-        </main>
+        <nav>
 
-        <footer>
-            <p>&copy; 2026 StudentHub Portal. All rights reserved.</p>
-        </footer>
-    </center>
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="register.html">Register</a>
+            <a href="login.html">Login</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="events.html">Events</a>
+            <a href="profile.html">Profile</a>
+            <a href="contact.html">Contact</a>
+            <a href="faq.html">FAQ</a>
+            <a href="feedback.html">Feedback</a>
+
+        </nav>
+
+    </header>
+
+
+    <main class="login-container">
+
+        <section class="login-hero">
+
+            <h2>Welcome Back 👋</h2>
+
+            <p>
+                Login to access your StudentHub Dashboard, Events, Attendance and Profile.
+            </p>
+
+        </section>
+
+
+        <section class="login-card">
+
+            <form action="dashboard.html">
+
+                <div class="form-row">
+
+                    <label>👤 User Role</label>
+
+                    <select>
+
+                        <option>Student</option>
+                        <option>Administrator</option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-row">
+
+                    <label>🎓 Enrollment No / ID</label>
+
+                    <input
+                        type="text"
+                        placeholder="Enter Enrollment Number or ID">
+
+                </div>
+
+
+                <div class="form-row">
+
+                    <label>🔒 Password</label>
+
+                    <input
+                        type="password"
+                        placeholder="Enter Password">
+
+                </div>
+
+
+                <div class="option-row">
+
+                    <label>
+                        <input type="checkbox">
+                        Remember Me
+                    </label>
+
+                    <a href="#">Forgot Password?</a>
+
+                </div>
+
+
+                <div class="button-area">
+
+                    <input type="submit" value="Login">
+
+                    <input type="reset" value="Clear">
+
+                </div>
+
+            </form>
+
+        </section>
+
+
+        <section class="need-account">
+
+            <h2>New User?</h2>
+
+            <p>
+                Create your StudentHub account to access campus services and academic resources.
+            </p>
+
+            <br>
+
+            <a href="register.html">
+                Register Here →
+            </a>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+
+        <p>
+            &copy; 2026 StudentHub Portal | Designed for Students
+        </p>
+
+    </footer>
+
+
+    <script src="scriptcomman.js"></script>
 
 </body>
+
 </html>

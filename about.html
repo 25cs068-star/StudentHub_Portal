@@ -1,80 +1,744 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StudentHub Portal - About Us</title>
+
+    <title>StudentHub Portal - About</title>
+
+    <!-- Common CSS -->
+    <link rel="stylesheet" href="csscommon.css">
+
+    <style>
+
+        /* ================= ABOUT PAGE ================= */
+
+        .about-container {
+            padding: 30px;
+            display: grid;
+            gap: 30px;
+        }
+
+
+        /* ================= ABOUT NOTIFICATION ================= */
+
+        .notification {
+            background: #003566;
+            color: white;
+            padding: 15px 50px 15px 20px;
+            border-radius: 12px;
+            position: relative;
+            box-shadow: 0 5px 12px rgba(0,0,0,.2);
+            animation: slideDown .6s;
+        }
+
+        .notification button {
+            position: absolute;
+            right: 15px;
+            top: 8px;
+            border: none;
+            background: transparent;
+            color: white;
+            font-size: 25px;
+            cursor: pointer;
+        }
+
+
+        @keyframes slideDown {
+
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+        }
+
+
+        /* ================= ABOUT HERO ================= */
+
+        .hero h2 {
+            font-size: 38px;
+            color: #003566;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            font-size: 18px;
+        }
+
+
+        /* ================= INFORMATION CARDS ================= */
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 25px;
+        }
+
+        .info-card {
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,.15);
+            transition: .4s;
+            cursor: pointer;
+        }
+
+        .info-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .info-card h3 {
+            margin-bottom: 15px;
+            color: #003566;
+        }
+
+        .extra-info {
+            display: none;
+            margin-top: 15px;
+            padding: 12px;
+            border-radius: 10px;
+            background: #eef4ff;
+            color: #003566;
+            animation: fadeIn .4s;
+        }
+
+        .extra-info.show {
+            display: block;
+        }
+
+
+        @keyframes fadeIn {
+
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+        }
+
+
+        /* ================= ROLES ================= */
+
+        .roles {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 25px;
+        }
+
+        .role {
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,.15);
+            transition: .4s;
+        }
+
+        .role:hover {
+            transform: scale(1.03);
+        }
+
+        .role h3 {
+            color: #003566;
+            margin-bottom: 15px;
+        }
+
+
+        /* ================= FEATURES ================= */
+
+        .features {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 25px;
+        }
+
+        .feature {
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,.15);
+            transition: .4s;
+            cursor: pointer;
+        }
+
+        .feature:hover {
+            transform: translateY(-8px);
+            background: linear-gradient(135deg,#0077b6,#00b4d8);
+            color: white;
+        }
+
+        .feature h3 {
+            margin-bottom: 10px;
+        }
+
+        .feature button {
+            margin-top: 15px;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 20px;
+            background: #003566;
+            color: white;
+            cursor: pointer;
+            transition: .3s;
+        }
+
+        .feature button:hover {
+            transform: scale(1.05);
+            background: white;
+            color: #003566;
+        }
+
+
+        /* ================= ABOUT MODAL ================= */
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 500;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,.65);
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        .modal-box {
+            background: white;
+            width: 500px;
+            max-width: 100%;
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,.3);
+            animation: modalOpen .4s;
+        }
+
+
+        @keyframes modalOpen {
+
+            from {
+                opacity: 0;
+                transform: scale(.8);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+        }
+
+
+        .modal-box h2 {
+            color: #003566;
+            margin-bottom: 15px;
+        }
+
+        .close-modal {
+            margin-top: 20px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 20px;
+            background: #003566;
+            color: white;
+            cursor: pointer;
+        }
+
+
+        /* ================= ABOUT DARK MODE ================= */
+
+        body.dark-mode .hero,
+        body.dark-mode .info-card,
+        body.dark-mode .role,
+        body.dark-mode .feature {
+            background: #1e1e1e;
+            color: #eeeeee;
+        }
+
+        body.dark-mode .hero h2,
+        body.dark-mode .info-card h3,
+        body.dark-mode .role h3 {
+            color: #00b4d8;
+        }
+
+        body.dark-mode .extra-info {
+            background: #292929;
+            color: #00b4d8;
+        }
+
+        body.dark-mode .modal-box {
+            background: #1e1e1e;
+            color: #eeeeee;
+        }
+
+        body.dark-mode .modal-box h2 {
+            color: #00b4d8;
+        }
+
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (min-width: 768px) {
+
+            .info-grid {
+                grid-template-columns: repeat(3,1fr);
+            }
+
+            .roles {
+                grid-template-columns: repeat(2,1fr);
+            }
+
+            .features {
+                grid-template-columns: repeat(3,1fr);
+            }
+
+        }
+
+
+        @media (max-width: 768px) {
+
+            .about-container {
+                padding: 20px;
+            }
+
+            .hero {
+                padding: 25px;
+            }
+
+            .hero h2 {
+                font-size: 30px;
+            }
+
+        }
+
+    </style>
+
 </head>
+
+
 <body>
 
-    <center>
-        <header>
-            <br>
-            <img src="logo.jfif" alt="StudentHub Portal Logo" width="150" height="150">
-            <h1>StudentHub Portal</h1>
-            <p>Your Digital Campus and Academic Companion</p>
-            <hr width="80%">
-            
-            <nav aria-label="Main Navigation">
-                <a href="index.html">Home</a> | 
-                <a href="about.html">About</a> | 
-                <a href="register.html">Register</a> | 
-                <a href="login.html">Login</a> | 
-                <a href="dashboard.html">Dashboard</a> | 
-                <a href="events.html">Events</a> | 
-                <a href="profile.html">Profile</a> | 
-                <a href="contact.html">Contact</a> |  
-                <a href="faq.html">FAQ</a> | 
-                <a href="feedback.html">Feedback</a>
-            </nav>
-            <hr width="80%">
-        </header>
 
-        <main>
-            <section>
-                <h2>About StudentHub</h2>
-                <p>StudentHub Portal is a centralized platform designed to simplify academic and campus life for both students and faculty members. It provides quick access to schedules, notices, event registrations, and performance records.</p>
-                <br>
-                <hr width="60%">
-            </section>
+<header>
 
-            <section>
-                <h2>Our Vision and Mission</h2>
-                
-                <ul type="none">
-                    <li>
-                        <h3>Our Vision</h3>
-                        <p>To create a digitally connected campus environment where every student has seamless access to academic resources and opportunities.</p>
-                    </li>
-                    <br>
-                    <li>
-                        <h3>Our Mission</h3>
-                        <p>To bridge the communication gap between administrators and students through a clean, fast, and accessible web portal.</p>
-                    </li>
-                </ul>
-                <br>
-                <hr width="60%">
-            </section>
+    <div class="logo-section">
 
-            <section>
-                <h2>User Roles in StudentHub</h2>
-                <table border="0" cellpadding="8" width="60%">
-                    <tr>
-                        <td align="center">
-                            <b>Student Role:</b> View attendance, check exam notices, register for events, and manage personal profile.<br><br>
-                            <b>Admin Role:</b> Manage student accounts, publish new campus events, and handle institutional announcements.
-                        </td>
-                    </tr>
-                </table>
-                <br>
-                <hr width="80%">
-            </section>
-        </main>
+        <img src="logo.jfif" alt="StudentHub Logo">
 
-        <footer>
-            <p>&copy; 2026 StudentHub Portal. All rights reserved.</p>
-        </footer>
-    </center>
+        <h1>StudentHub Portal</h1>
+
+        <p>Your Digital Campus and Academic Companion</p>
+
+    </div>
+
+
+    <button id="themeToggle" class="theme-btn">
+        🌙 Dark Mode
+    </button>
+
+
+    <button id="menuToggle" class="menu-btn">
+        ☰
+    </button>
+
+
+    <nav>
+
+        <a href="index.html">Home</a>
+
+        <a href="about.html">About</a>
+
+        <a href="register.html">Register</a>
+
+        <a href="login.html">Login</a>
+
+        <a href="dashboard.html">Dashboard</a>
+
+        <a href="events.html">Events</a>
+
+        <a href="profile.html">Profile</a>
+
+        <a href="contact.html">Contact</a>
+
+        <a href="faq.html">FAQ</a>
+
+        <a href="feedback.html">Feedback</a>
+
+    </nav>
+
+</header>
+
+
+<main class="about-container">
+
+
+    <!-- ================= NOTIFICATION ================= -->
+
+    <div class="notification" id="aboutNotification">
+
+        🔔 <strong>About StudentHub:</strong>
+
+        Discover our vision, mission and features.
+
+        <button id="closeNotification">
+            &times;
+        </button>
+
+    </div>
+
+
+    <!-- ================= HERO ================= -->
+
+    <section class="hero">
+
+        <h2>About StudentHub</h2>
+
+        <p>
+            One Smart Portal for Every Student. Manage academics,
+            campus activities, events, notices and student
+            services from a single platform.
+        </p>
+
+    </section>
+
+
+    <!-- ================= INFORMATION ================= -->
+
+    <section class="info-grid">
+
+
+        <div class="info-card" data-info="vision">
+
+            <h3>🎯 Vision</h3>
+
+            <p>
+                Build a smart digital campus where every student
+                can access learning resources anytime.
+            </p>
+
+            <div class="extra-info">
+
+                StudentHub aims to provide students with
+                easy access to academic resources and
+                digital campus services.
+
+            </div>
+
+        </div>
+
+
+        <div class="info-card" data-info="mission">
+
+            <h3>🚀 Mission</h3>
+
+            <p>
+                Create a secure, responsive and user-friendly portal
+                connecting students and faculty.
+            </p>
+
+            <div class="extra-info">
+
+                Our mission is to connect students and faculty
+                through a simple, secure and responsive
+                digital platform.
+
+            </div>
+
+        </div>
+
+
+        <div class="info-card" data-info="goal">
+
+            <h3>⭐ Goal</h3>
+
+            <p>
+                Make campus communication faster, easier and
+                completely digital.
+            </p>
+
+            <div class="extra-info">
+
+                The goal is to reduce manual work and make
+                important campus information available
+                from one platform.
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+    <!-- ================= ROLES ================= -->
+
+    <section class="roles">
+
+
+        <div class="role">
+
+            <h3>👨‍🎓 Student</h3>
+
+            <p>✔ Attendance</p>
+
+            <p>✔ Results</p>
+
+            <p>✔ Events</p>
+
+            <p>✔ Profile</p>
+
+            <p>✔ Notices</p>
+
+        </div>
+
+
+        <div class="role">
+
+            <h3>👨‍💼 Administrator</h3>
+
+            <p>✔ Manage Students</p>
+
+            <p>✔ Publish Notices</p>
+
+            <p>✔ Organize Events</p>
+
+            <p>✔ Update Records</p>
+
+            <p>✔ Portal Management</p>
+
+        </div>
+
+
+    </section>
+
+
+    <!-- ================= FEATURES ================= -->
+
+    <section class="features">
+
+
+        <div class="feature">
+
+            <h3>📊 Dashboard</h3>
+
+            <p>
+                Monitor attendance, marks and academic progress.
+            </p>
+
+            <button
+                class="featureBtn"
+                data-title="Student Dashboard"
+                data-message="The StudentHub Dashboard allows students to monitor attendance, marks, timetable and academic progress.">
+
+                Learn More
+
+            </button>
+
+        </div>
+
+
+        <div class="feature">
+
+            <h3>📅 Campus Events</h3>
+
+            <p>
+                Register for workshops, seminars, hackathons and festivals.
+            </p>
+
+            <button
+                class="featureBtn"
+                data-title="Campus Events"
+                data-message="Students can explore and register for workshops, seminars, hackathons, technical events and cultural festivals.">
+
+                Learn More
+
+            </button>
+
+        </div>
+
+
+        <div class="feature">
+
+            <h3>🔒 Secure Access</h3>
+
+            <p>
+                Safe login system with easy access to student information.
+            </p>
+
+            <button
+                class="featureBtn"
+                data-title="Secure Access"
+                data-message="StudentHub provides a secure and user-friendly login system for accessing student information and portal services.">
+
+                Learn More
+
+            </button>
+
+        </div>
+
+
+    </section>
+
+
+</main>
+
+
+<!-- ================= MODAL ================= -->
+
+<div class="modal" id="featureModal">
+
+    <div class="modal-box">
+
+        <h2 id="modalTitle">
+            StudentHub
+        </h2>
+
+        <p id="modalMessage">
+            Feature information.
+        </p>
+
+        <button
+            class="close-modal"
+            id="closeModal">
+
+            Close
+
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <p>
+        &copy; 2026 StudentHub Portal | Designed for Students
+    </p>
+
+</footer>
+
+
+<!-- ================= COMMON JAVASCRIPT ================= -->
+
+<script src="scriptcomman.js"></script>
+
+
+<script>
+
+    const notification =
+        document.getElementById("aboutNotification");
+
+    const closeNotification =
+        document.getElementById("closeNotification");
+
+
+    closeNotification.addEventListener("click", function() {
+
+        notification.style.display = "none";
+
+    });
+
+
+    const infoCards =
+        document.querySelectorAll(".info-card");
+
+
+    infoCards.forEach(function(card) {
+
+        card.addEventListener("click", function() {
+
+            const extraInfo =
+                card.querySelector(".extra-info");
+
+            extraInfo.classList.toggle("show");
+
+        });
+
+    });
+
+
+    const modal =
+        document.getElementById("featureModal");
+
+    const modalTitle =
+        document.getElementById("modalTitle");
+
+    const modalMessage =
+        document.getElementById("modalMessage");
+
+    const closeModal =
+        document.getElementById("closeModal");
+
+
+    const featureButtons =
+        document.querySelectorAll(".featureBtn");
+
+
+    featureButtons.forEach(function(button) {
+
+        button.addEventListener("click", function(event) {
+
+            event.stopPropagation();
+
+            modalTitle.textContent =
+                button.getAttribute("data-title");
+
+            modalMessage.textContent =
+                button.getAttribute("data-message");
+
+            modal.classList.add("show");
+
+        });
+
+    });
+
+
+    closeModal.addEventListener("click", function() {
+
+        modal.classList.remove("show");
+
+    });
+
+
+    modal.addEventListener("click", function(event) {
+
+        if (event.target === modal) {
+
+            modal.classList.remove("show");
+
+        }
+
+    });
+
+</script>
+
 
 </body>
+
 </html>

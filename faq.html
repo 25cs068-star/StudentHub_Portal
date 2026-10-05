@@ -1,112 +1,560 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>StudentHub Portal - FAQ</title>
+
+    <link rel="stylesheet" href="csscommon.css">
+
+    <style>
+
+        /* ================= FAQ PAGE ================= */
+
+        .faq-container {
+            width: 92%;
+            max-width: 1100px;
+            margin: 40px auto;
+        }
+
+        /* ================= HERO ================= */
+
+        .faq-hero {
+            background: linear-gradient(135deg, #ffffff, #f4faff);
+            padding: 45px 30px;
+            text-align: center;
+            border-radius: 25px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+            margin-bottom: 25px;
+        }
+
+        .faq-hero h2 {
+            font-size: 36px;
+            color: #003566;
+            margin-bottom: 12px;
+        }
+
+        .faq-hero p {
+            color: #555;
+            font-size: 17px;
+            line-height: 1.6;
+        }
+
+        /* ================= FAQ CARD ================= */
+
+        .faq-card {
+            background: white;
+            padding: 35px;
+            border-radius: 25px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        .faq-heading {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .faq-heading h2 {
+            color: #003566;
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        .faq-heading p {
+            color: #666;
+        }
+
+        /* ================= SEARCH ================= */
+
+        .search-box {
+            position: relative;
+            margin-bottom: 25px;
+        }
+
+        #searchInput {
+            width: 100%;
+            padding: 16px 20px;
+            border: 2px solid #d9e5ef;
+            border-radius: 14px;
+            font-size: 16px;
+            outline: none;
+            background: #f8fbff;
+            transition: 0.3s;
+        }
+
+        #searchInput:focus {
+            border-color: #0077b6;
+            background: white;
+            box-shadow: 0 0 0 4px rgba(0, 119, 182, 0.1);
+        }
+
+        /* ================= FAQ WELCOME ================= */
+
+        .welcome-box {
+            background: linear-gradient(135deg, #eaf7ff, #f8fbff);
+            border: 1px solid #d6e8f5;
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .welcome-box h3 {
+            color: #003566;
+            font-size: 25px;
+            margin-bottom: 10px;
+        }
+
+        .welcome-box p {
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+        /* ================= CATEGORY BUTTONS ================= */
+
+        .category-buttons {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 12px;
+        }
+
+        .category-buttons button {
+            border: 1px solid #d4e3ed;
+            background: white;
+            color: #003566;
+            padding: 15px 10px;
+            border-radius: 14px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .category-buttons button:hover {
+            background: #0077b6;
+            color: white;
+            border-color: #0077b6;
+            transform: translateY(-3px);
+            box-shadow: 0 7px 15px rgba(0, 119, 182, 0.2);
+        }
+
+        /* ================= RESULT HEADER ================= */
+
+        .result-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            gap: 15px;
+        }
+
+        .result-header h3 {
+            color: #003566;
+            font-size: 23px;
+        }
+
+        .result-header button {
+            border: none;
+            background: #e8f4ff;
+            color: #0077b6;
+            padding: 9px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .result-header button:hover {
+            background: #0077b6;
+            color: white;
+        }
+
+        /* ================= FAQ LIST ================= */
+
+        .faq-list {
+            display: grid;
+            gap: 12px;
+        }
+
+        .faq-item {
+            background: white;
+            border: 1px solid #dce6ed;
+            border-radius: 14px;
+            overflow: hidden;
+            transition: 0.3s;
+        }
+
+        .faq-item:hover {
+            border-color: #9bcde5;
+            box-shadow: 0 5px 15px rgba(0, 119, 182, 0.08);
+        }
+
+        .faq-question {
+            width: 100%;
+            padding: 18px 20px;
+            border: none;
+            background: #f8fbff;
+            color: #003566;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: left;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .faq-question:hover {
+            background: #edf8ff;
+        }
+
+        .faq-question b {
+            min-width: 28px;
+            height: 28px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            background: #0077b6;
+            color: white;
+            font-size: 20px;
+            transition: 0.3s;
+        }
+
+        .faq-answer {
+            display: none;
+            padding: 18px 20px;
+            background: white;
+            color: #555;
+            line-height: 1.7;
+            border-top: 1px solid #e1e8ed;
+        }
+
+        .faq-answer.show {
+            display: block;
+        }
+
+        /* ================= NO RESULT ================= */
+
+        .no-result {
+            text-align: center;
+            padding: 35px;
+            background: #f8fbff;
+            border-radius: 18px;
+            border: 1px solid #dce6ed;
+        }
+
+        .no-result h3 {
+            color: #003566;
+            margin-bottom: 8px;
+        }
+
+        .no-result p {
+            color: #666;
+        }
+
+        /* ================= DARK MODE ================= */
+
+        body.dark-mode .faq-hero,
+        body.dark-mode .faq-card {
+            background: #1e1e1e;
+        }
+
+        body.dark-mode .faq-hero h2,
+        body.dark-mode .faq-heading h2 {
+            color: #00b4d8;
+        }
+
+        body.dark-mode .faq-hero p,
+        body.dark-mode .faq-heading p {
+            color: #ccc;
+        }
+
+        body.dark-mode #searchInput {
+            background: #252525;
+            border-color: #444;
+            color: white;
+        }
+
+        body.dark-mode #searchInput::placeholder {
+            color: #aaa;
+        }
+
+        body.dark-mode .welcome-box {
+            background: #252525;
+            border-color: #444;
+        }
+
+        body.dark-mode .welcome-box h3 {
+            color: #00b4d8;
+        }
+
+        body.dark-mode .welcome-box p {
+            color: #ccc;
+        }
+
+        body.dark-mode .category-buttons button {
+            background: #252525;
+            color: white;
+            border-color: #444;
+        }
+
+        body.dark-mode .category-buttons button:hover {
+            background: #0077b6;
+            border-color: #0077b6;
+        }
+
+        body.dark-mode .result-header h3 {
+            color: #00b4d8;
+        }
+
+        body.dark-mode .result-header button {
+            background: #333;
+            color: #00b4d8;
+        }
+
+        body.dark-mode .faq-item {
+            background: #252525;
+            border-color: #444;
+        }
+
+        body.dark-mode .faq-question {
+            background: #252525;
+            color: white;
+        }
+
+        body.dark-mode .faq-question:hover {
+            background: #333;
+        }
+
+        body.dark-mode .faq-answer {
+            background: #1e1e1e;
+            color: #ddd;
+            border-color: #444;
+        }
+
+        body.dark-mode .no-result {
+            background: #252525;
+            border-color: #444;
+        }
+
+        body.dark-mode .no-result h3 {
+            color: #00b4d8;
+        }
+
+        body.dark-mode .no-result p {
+            color: #ccc;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media(max-width: 900px) {
+
+            .category-buttons {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+        }
+
+        @media(max-width: 768px) {
+
+            .logo-section h1 {
+                font-size: 30px;
+            }
+
+            .logo-section img {
+                width: 110px;
+                height: 110px;
+            }
+
+            .faq-hero h2 {
+                font-size: 28px;
+            }
+
+            .faq-card {
+                padding: 22px;
+            }
+
+            .category-buttons {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+        }
+
+        @media(max-width: 500px) {
+
+            .faq-container {
+                width: 94%;
+                margin: 25px auto;
+            }
+
+            .faq-hero {
+                padding: 30px 20px;
+            }
+
+            .faq-hero h2 {
+                font-size: 24px;
+            }
+
+            .faq-card {
+                padding: 18px;
+            }
+
+            .category-buttons {
+                grid-template-columns: 1fr;
+            }
+
+            .result-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .faq-question {
+                font-size: 15px;
+                padding: 16px;
+            }
+
+        }
+
+    </style>
+
 </head>
+
+
 <body>
 
-    <center>
-        
-        <header>
-            <br>
-            <img src="logo.jfif" alt="StudentHub Portal Logo" width="130" height="130">
+    <!-- ================= HEADER ================= -->
+
+    <header>
+
+        <div class="logo-section">
+
+            <img src="logo.jfif" alt="StudentHub Logo">
+
             <h1>StudentHub Portal</h1>
+
             <p>Your Digital Campus and Academic Companion</p>
-            <hr width="85%">
-            
-            <nav aria-label="Main Navigation">
-                <a href="index.html">Home</a> | 
-                <a href="about.html">About</a> | 
-                <a href="register.html">Register</a> | 
-                <a href="login.html">Login</a> | 
-                <a href="dashboard.html">Dashboard</a> | 
-                <a href="events.html">Events</a> | 
-                <a href="profile.html">Profile</a> | 
-                <a href="contact.html">Contact</a> | 
-                <a href="faq.html"><b><u>FAQ</u></b></a> | 
-                <a href="feedback.html">Feedback</a>
-            </nav>
-            <hr width="85%">
-        </header>
 
-       
-        <main style="width: 85%;">
-            <br>
-            
-            
-            <table border="0" width="100%">
-                <tr>
-                    <td align="left">
-                        <h2>Frequently Asked Questions</h2>
-                        <p>Find quick answers to common questions about StudentHub Portal.</p>
-                    </td>
-                </tr>
-            </table>
-            <br>
+        </div>
 
-            
-            <table border="1" cellpadding="15" cellspacing="0" width="100%">
-                <tr>
-                    <td>
-                        <h3>General Questions</h3>
-                        <hr>
-                        <br>
 
-                       
-                        <details open>
-                            <summary><b>Q1: How do I register on StudentHub Portal?</b></summary>
-                            <p>Go to the Register page from the top navigation bar and fill in your registration details.</p>
-                        </details>
-                        <hr>
+        <button type="button" id="themeToggle" class="theme-btn">
+            🌙 Dark Mode
+        </button>
 
-                       
-                        <details>
-                            <summary><b>Q2: What should I use as my username during login?</b></summary>
-                            <p>Students can use their official Enrollment Number as their username.</p>
-                        </details>
-                        <hr>
 
-                       
-                        <details>
-                            <summary><b>Q3: Where can I check upcoming campus events?</b></summary>
-                            <p>You can check all upcoming activities and dates on the Events page.</p>
-                        </details>
-                        <hr>
+        <button type="button" id="menuToggle" class="menu-btn">
+            ☰
+        </button>
 
-                       
-                        <details>
-                            <summary><b>Q4: How can I contact support?</b></summary>
-                            <p>Visit the Contact page to view our campus address, email, and phone contact info.</p>
-                        </details>
 
-                    </td>
-                </tr>
-            </table>
+        <nav>
 
-            <br><br>
+            <a href="index.html">Home</a>
 
-            
-            <table border="1" cellpadding="12" cellspacing="0" width="100%">
-                <tr>
-                    <td align="center">
-                        <h3>Still Have Questions?</h3>
-                        <p>If you cannot find the answer to your question above, feel free to reach out to us.</p>
-                        <a href="contact.html">Go to Contact Support Page</a>
-                    </td>
-                </tr>
-            </table>
+            <a href="about.html">About</a>
 
-            <br>
-            <hr width="100%">
-        </main>
+            <a href="register.html">Register</a>
 
-        
-        <footer>
-            <p><small>&copy; 2026 StudentHub Portal. All rights reserved.</small></p>
-        </footer>
-    </center>
+            <a href="login.html">Login</a>
+
+            <a href="dashboard.html">Dashboard</a>
+
+            <a href="events.html">Events</a>
+
+            <a href="profile.html">Profile</a>
+
+            <a href="contact.html">Contact</a>
+
+            <a href="faq.html">FAQ</a>
+
+            <a href="feedback.html">Feedback</a>
+
+        </nav>
+
+    </header>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="faq-container">
+
+
+        <!-- HERO -->
+
+        <section class="faq-hero">
+
+            <h2>Frequently Asked Questions ❓</h2>
+
+            <p>
+                Find quick answers to the most common questions
+                about StudentHub Portal.
+            </p>
+
+        </section>
+
+
+        <!-- FAQ SECTION -->
+
+        <section class="faq-card">
+
+            <div class="faq-heading">
+
+                <h2>How can we help you?</h2>
+
+                <p>
+                    Search your question or select a topic to explore.
+                </p>
+
+            </div>
+
+
+            <!-- SEARCH -->
+
+            <div class="search-box">
+
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="🔍  Search your question..."
+                >
+
+            </div>
+
+
+            <!-- FAQ CONTENT -->
+
+            <div id="faqContainer">
+
+                <p>Loading FAQs...</p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        <p>
+            &copy; 2026 StudentHub Portal | Designed for Students
+        </p>
+
+    </footer>
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <script src="faq.js"></script>
+
+    <script src="scriptcomman.js"></script>
 
 </body>
+
 </html>

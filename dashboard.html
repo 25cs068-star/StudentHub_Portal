@@ -1,134 +1,1274 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>StudentHub Portal - Dashboard</title>
+
+    <link rel="stylesheet" href="csscommon.css">
+
+    <style>
+
+        .dashboard-container {
+            width: 95%;
+            max-width: 1200px;
+            margin: 35px auto;
+        }
+
+        .welcome {
+            background: linear-gradient(135deg, #003566, #0077b6);
+            color: white;
+            padding: 35px;
+            border-radius: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,.15);
+        }
+
+        .welcome h2 {
+            font-size: 30px;
+            margin-bottom: 8px;
+        }
+
+        .welcome p {
+            font-size: 16px;
+        }
+
+        .profile-section {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,.12);
+            margin-bottom: 25px;
+        }
+
+        .section-title {
+            color: #003566;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        .profile-layout {
+            display: grid;
+            grid-template-columns: 180px 1fr;
+            gap: 25px;
+            align-items: center;
+        }
+
+        .profile-user {
+            text-align: center;
+            padding: 20px;
+            background: #f4f9fd;
+            border-radius: 16px;
+        }
+
+        .profile-avatar {
+            width: 90px;
+            height: 90px;
+            margin: 0 auto 12px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #0077b6, #00b4d8);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        .profile-user h3 {
+            color: #003566;
+            margin-bottom: 5px;
+        }
+
+        .profile-user p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .profile-details {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .profile-item {
+            padding: 16px;
+            background: #f8fbff;
+            border: 1px solid #d5dce3;
+            border-radius: 12px;
+        }
+
+        .profile-item span {
+            display: block;
+            color: #0077b6;
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .profile-item p {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 25px;
+            margin-bottom: 25px;
+        }
+
+        .dashboard-card {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,.12);
+        }
+
+        .attendance-header {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            margin-bottom: 25px;
+        }
+
+        .attendance-circle {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            border: 10px solid #00b4d8;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .attendance-circle strong {
+            font-size: 26px;
+            color: #003566;
+        }
+
+        .attendance-circle span {
+            font-size: 11px;
+            color: #666;
+        }
+
+        .attendance-header h3 {
+            color: #003566;
+            margin-bottom: 6px;
+        }
+
+        .attendance-header p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .subject {
+            margin-bottom: 16px;
+        }
+
+        .subject:last-child {
+            margin-bottom: 0;
+        }
+
+        .subject-top {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 6px;
+            font-size: 14px;
+        }
+
+        .subject-top b {
+            color: #0077b6;
+        }
+
+        .progress {
+            height: 8px;
+            background: #e2eaf0;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: #0077b6;
+            border-radius: 10px;
+        }
+
+        .academic-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .academic-card {
+            padding: 20px;
+            border-radius: 14px;
+            background: #f5f9fc;
+            border-left: 5px solid #0077b6;
+        }
+
+        .academic-card span {
+            color: #666;
+            font-size: 13px;
+        }
+
+        .academic-card strong {
+            display: block;
+            font-size: 28px;
+            color: #003566;
+            margin-top: 7px;
+        }
+
+        .assignment-section {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,.12);
+            margin-bottom: 25px;
+        }
+
+        .assignment-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            gap: 15px;
+        }
+
+        .assignment-header .section-title {
+            margin-bottom: 0;
+        }
+
+        .assignment-count {
+            background: #e8f6fb;
+            color: #0077b6;
+            padding: 8px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        .assignment-controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 18px;
+        }
+
+        .assignment-search {
+            flex: 1;
+            padding: 12px 15px;
+            border: 1px solid #d5dce3;
+            border-radius: 10px;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .assignment-search:focus {
+            border-color: #0077b6;
+        }
+
+        .assignment-filter {
+            padding: 12px 15px;
+            border: 1px solid #d5dce3;
+            border-radius: 10px;
+            background: white;
+            color: #333;
+            outline: none;
+        }
+
+        .assignment-scroll {
+            height: 390px;
+            overflow-y: auto;
+            padding-right: 8px;
+        }
+
+        .assignment-scroll::-webkit-scrollbar {
+            width: 7px;
+        }
+
+        .assignment-scroll::-webkit-scrollbar-track {
+            background: #edf2f5;
+            border-radius: 10px;
+        }
+
+        .assignment-scroll::-webkit-scrollbar-thumb {
+            background: #0077b6;
+            border-radius: 10px;
+        }
+
+        .assignment-list {
+            display: grid;
+            gap: 12px;
+        }
+
+        .assignment {
+            display: grid;
+            grid-template-columns: 55px 1fr auto auto;
+            align-items: center;
+            gap: 16px;
+            padding: 17px;
+            background: #f8fbff;
+            border: 1px solid #d5dce3;
+            border-radius: 14px;
+            transition: .3s;
+        }
+
+        .assignment:hover {
+            transform: translateX(4px);
+            border-color: #00b4d8;
+            box-shadow: 0 4px 12px rgba(0,119,182,.10);
+        }
+
+        .assignment-number {
+            width: 45px;
+            height: 45px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #003566, #0077b6);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 13px;
+        }
+
+        .assignment-info h4 {
+            color: #003566;
+            margin-bottom: 5px;
+            font-size: 15px;
+        }
+
+        .assignment-info p {
+            color: #666;
+            font-size: 13px;
+            margin-bottom: 6px;
+        }
+
+        .assignment-info small {
+            color: #888;
+            font-size: 12px;
+        }
+
+        .status {
+            padding: 7px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        .completed {
+            background: #e7f7ee;
+            color: #16834b;
+        }
+
+        .pending {
+            background: #fff1d9;
+            color: #a96800;
+        }
+
+        .in-progress {
+            background: #e5f1ff;
+            color: #1769aa;
+        }
+
+        .marks {
+            background: #e8f6fb;
+            color: #0077b6;
+            padding: 7px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        .bottom-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin-bottom: 25px;
+        }
+
+        .bottom-card {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,.12);
+        }
+
+        .activity-list {
+            display: grid;
+            gap: 12px;
+        }
+
+        .activity {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 13px;
+            background: #f8fbff;
+            border-radius: 10px;
+        }
+
+        .activity-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #e3f4fa;
+            color: #0077b6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .activity p {
+            font-size: 14px;
+            color: #444;
+        }
+
+        .quick-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .quick-actions a {
+            text-decoration: none;
+            text-align: center;
+            padding: 15px;
+            border-radius: 12px;
+            background: #f1f7fb;
+            border: 1px solid #d5e6ef;
+            color: #003566;
+            font-weight: bold;
+            transition: .3s;
+        }
+
+        .quick-actions a:hover {
+            background: #0077b6;
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        body.dark-mode .welcome,
+        body.dark-mode .profile-section,
+        body.dark-mode .dashboard-card,
+        body.dark-mode .assignment-section,
+        body.dark-mode .bottom-card {
+            background: #1e1e1e;
+            color: #eeeeee;
+        }
+
+        body.dark-mode .section-title,
+        body.dark-mode .profile-user h3,
+        body.dark-mode .attendance-header h3,
+        body.dark-mode .academic-card strong {
+            color: #00b4d8;
+        }
+
+        body.dark-mode .profile-user,
+        body.dark-mode .profile-item,
+        body.dark-mode .academic-card,
+        body.dark-mode .assignment {
+            background: #252525;
+            border-color: #444;
+        }
+
+        body.dark-mode .profile-item p,
+        body.dark-mode .activity p,
+        body.dark-mode .assignment-info p,
+        body.dark-mode .assignment-info small,
+        body.dark-mode .attendance-header p {
+            color: #cccccc;
+        }
+
+        body.dark-mode .assignment-search,
+        body.dark-mode .assignment-filter {
+            background: #252525;
+            color: #eeeeee;
+            border-color: #444;
+        }
+
+        body.dark-mode .assignment-count {
+            background: #173746;
+            color: #00b4d8;
+        }
+
+        body.dark-mode .marks {
+            background: #173746;
+            color: #00b4d8;
+        }
+
+        body.dark-mode .assignment-scroll::-webkit-scrollbar-track {
+            background: #333;
+        }
+
+        body.dark-mode .assignment-scroll::-webkit-scrollbar-thumb {
+            background: #00b4d8;
+        }
+
+        body.dark-mode .activity {
+            background: #252525;
+        }
+
+        body.dark-mode .quick-actions a {
+            background: #252525;
+            border-color: #444;
+            color: #eeeeee;
+        }
+
+        @media(max-width: 900px) {
+
+            .profile-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .dashboard-grid,
+            .bottom-grid {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+        @media(max-width: 700px) {
+
+            .assignment {
+                grid-template-columns: 50px 1fr;
+            }
+
+            .assignment .status,
+            .assignment .marks {
+                grid-column: 2;
+                justify-self: start;
+            }
+
+        }
+
+        @media(max-width: 600px) {
+
+            .profile-details,
+            .academic-grid,
+            .quick-actions {
+                grid-template-columns: 1fr;
+            }
+
+            .attendance-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .assignment-header {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .assignment-controls {
+                flex-direction: column;
+            }
+
+            .assignment {
+                grid-template-columns: 45px 1fr;
+            }
+
+            .assignment .status,
+            .assignment .marks {
+                grid-column: 2;
+                justify-self: start;
+            }
+
+        }
+
+    </style>
+
 </head>
+
 <body>
 
-    <center>
-       
-        
-        <header>
-            <br>
-            <img src="logo.jfif" alt="StudentHub Portal Logo" width="130" height="130">
+    <header>
+
+        <button id="themeToggle" class="theme-btn" type="button">
+            🌙 Dark Mode
+        </button>
+
+        <button id="menuToggle" class="menu-btn" type="button">
+            ☰
+        </button>
+
+        <div class="logo-section">
+
+            <img src="logo.jfif" alt="StudentHub Logo">
+
             <h1>StudentHub Portal</h1>
+
             <p>Your Digital Campus and Academic Companion</p>
-            <hr width="85%">
-            
-            <nav aria-label="Main Navigation">
-                <a href="index.html">Home</a> | 
-                <a href="about.html">About</a> | 
-                <a href="register.html">Register</a> | 
-                <a href="login.html">Login</a> | 
-                <a href="dashboard.html"><b><u>Dashboard</u></b></a> | 
-                <a href="events.html">Events</a> | 
-                <a href="profile.html">Profile</a> | 
-                <a href="contact.html">Contact</a> | 
-                <a href="faq.html">FAQ</a> | 
-                <a href="feedback.html">Feedback</a>
-            </nav>
-            <hr width="85%">
-        </header>
 
-        
-        <main style="width: 85%;">
-            <br>
-            
-           
-            <table border="0" width="100%">
-                <tr>
-                    <td align="left">
-                        <h2>Student Dashboard</h2>
-                        <p>Welcome back, Student!</p>
-                    </td>
-                    <td align="right">
-                        <b>Enrollment:</b> 25CSXXX
-                    </td>
-                </tr>
-            </table>
-            <br>
+        </div>
 
-           
-            <table border="1" cellpadding="12" cellspacing="0" width="100%">
-                <tr align="center">
-                    <td width="33%">
-                        <h1>100</h1>
-                        <p><b>Total Classes</b></p>
-                    </td>
-                    <td width="33%">
-                        <h1>85</h1>
-                        <p><b>Classes Attended</b></p>
-                    </td>
-                    <td width="33%">
-                        <h1>85%</h1>
-                        <p><b>Overall Attendance</b></p>
-                    </td>
-                </tr>
-            </table>
+        <nav>
 
-            <br><br>
+            <a href="index.html">Home</a>
 
-            
-            <table border="0" cellpadding="10" cellspacing="0" width="100%">
-                <tr>
-                    
-                    <td width="45%" valign="top">
-                        <table border="1" cellpadding="12" cellspacing="0" width="100%">
-                            <tr>
-                                <td>
-                                    <h3>Student Info</h3>
-                                    <hr>
-                                    <p><b>Name:</b> Student Name</p>
-                                    <p><b>Department:</b> Computer Science</p>
-                                    <p><b>Semester:</b> 4th Semester</p>
-                                    <p><b>Status:</b> Active / Satisfactory</p>
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
+            <a href="about.html">About</a>
 
-                    
-                    <td width="55%" valign="top">
-                        <table border="1" cellpadding="8" cellspacing="0" width="100%">
-                            <tr>
-                                <th colspan="3">Today's Schedule</th>
-                            </tr>
-                            <tr>
-                                <th>Time</th>
-                                <th>Subject</th>
-                                <th>Venue</th>
-                            </tr>
-                            <tr>
-                                <td>10:00 - 11:00</td>
-                                <td>Mathematics</td>
-                                <td>Lab 1</td>
-                            </tr>
-                            <tr>
-                                <td>11:00 - 12:00</td>
-                                <td>Computer Networks</td>
-                                <td>Room 204</td>
-                            </tr>
-                            <tr>
-                                <td>12:00 - 01:00</td>
-                                <td>Data Structures</td>
-                                <td>Lab 3</td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-            </table>
+            <a href="register.html">Register</a>
 
-            <br>
-            <hr width="100%">
-        </main>
+            <a href="login.html">Login</a>
 
-        
-        <footer>
-            <p><small>&copy; 2026 StudentHub Portal. All rights reserved.</small></p>
-        </footer>
-    </center>
+            <a href="dashboard.html">Dashboard</a>
+
+            <a href="events.html">Events</a>
+
+            <a href="profile.html">Profile</a>
+
+            <a href="contact.html">Contact</a>
+
+            <a href="faq.html">FAQ</a>
+
+            <a href="feedback.html">Feedback</a>
+
+        </nav>
+
+    </header>
+
+    <main class="dashboard-container">
+
+        <section class="welcome">
+
+            <h2>Welcome back, Krisha! 👋</h2>
+
+            <p>
+                Here is your personal academic overview.
+            </p>
+
+        </section>
+
+        <section class="profile-section">
+
+            <h2 class="section-title">
+                👤 Student Profile
+            </h2>
+
+            <div class="profile-layout">
+
+                <div class="profile-user">
+
+                    <div class="profile-avatar">
+                        KP
+                    </div>
+
+                    <h3>Krisha Patel</h3>
+
+                    <p>Computer Engineering</p>
+
+                </div>
+
+                <div class="profile-details">
+
+                    <div class="profile-item">
+                        <span>Enrollment Number</span>
+                        <p>25CS068</p>
+                    </div>
+
+                    <div class="profile-item">
+                        <span>Year</span>
+                        <p>2nd Year</p>
+                    </div>
+
+                    <div class="profile-item">
+                        <span>Email</span>
+                        <p>krisha@example.com</p>
+                    </div>
+
+                    <div class="profile-item">
+                        <span>Mobile</span>
+                        <p>9876543210</p>
+                    </div>
+
+                    <div class="profile-item">
+                        <span>City</span>
+                        <p>Ahmedabad</p>
+                    </div>
+
+                    <div class="profile-item">
+                        <span>Profile Status</span>
+                        <p>100% Complete</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <section class="dashboard-grid">
+
+            <div class="dashboard-card">
+
+                <h2 class="section-title">
+                    📊 Attendance
+                </h2>
+
+                <div class="attendance-header">
+
+                    <div class="attendance-circle">
+
+                        <strong>92%</strong>
+
+                        <span>Overall</span>
+
+                    </div>
+
+                    <div>
+
+                        <h3>Good Attendance</h3>
+
+                        <p>
+                            Keep maintaining your regular attendance.
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="subject">
+
+                    <div class="subject-top">
+                        <span>Web Development</span>
+                        <b>95%</b>
+                    </div>
+
+                    <div class="progress">
+                        <div class="progress-bar" style="width:95%;"></div>
+                    </div>
+
+                </div>
+
+                <div class="subject">
+
+                    <div class="subject-top">
+                        <span>Java Programming</span>
+                        <b>90%</b>
+                    </div>
+
+                    <div class="progress">
+                        <div class="progress-bar" style="width:90%;"></div>
+                    </div>
+
+                </div>
+
+                <div class="subject">
+
+                    <div class="subject-top">
+                        <span>Computer Networks</span>
+                        <b>88%</b>
+                    </div>
+
+                    <div class="progress">
+                        <div class="progress-bar" style="width:88%;"></div>
+                    </div>
+
+                </div>
+
+                <div class="subject">
+
+                    <div class="subject-top">
+                        <span>Data Structures</span>
+                        <b>93%</b>
+                    </div>
+
+                    <div class="progress">
+                        <div class="progress-bar" style="width:93%;"></div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="dashboard-card">
+
+                <h2 class="section-title">
+                    📚 Academic Overview
+                </h2>
+
+                <div class="academic-grid">
+
+                    <div class="academic-card">
+                        <span>Subjects</span>
+                        <strong>6</strong>
+                    </div>
+
+                    <div class="academic-card">
+                        <span>Total Assignments</span>
+                        <strong>12</strong>
+                    </div>
+
+                    <div class="academic-card">
+                        <span>Completed</span>
+                        <strong>7</strong>
+                    </div>
+
+                    <div class="academic-card">
+                        <span>Pending</span>
+                        <strong>4</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <section class="assignment-section">
+
+            <div class="assignment-header">
+
+                <h2 class="section-title">
+                    📝 Assignment Hub
+                </h2>
+
+                <span class="assignment-count">
+                    12 Assignments
+                </span>
+
+            </div>
+
+            <div class="assignment-controls">
+
+                <input
+                    type="text"
+                    class="assignment-search"
+                    placeholder="🔍 Search assignment..."
+                >
+
+                <select class="assignment-filter">
+
+                    <option>All Assignments</option>
+
+                    <option>Completed</option>
+
+                    <option>Pending</option>
+
+                    <option>In Progress</option>
+
+                </select>
+
+            </div>
+
+            <div class="assignment-scroll">
+
+                <div class="assignment-list">
+
+                    <div class="assignment">
+
+                        <div class="assignment-number">
+                            01
+                        </div>
+
+                        <div class="assignment-info">
+
+                            <h4>Java Programming Practical</h4>
+
+                            <p>Object-Oriented Programming</p>
+
+                            <small>Submitted: 02 Oct 2026</small>
+
+                        </div>
+
+                        <span class="status completed">
+                            ✓ Completed
+                        </span>
+
+                        <span class="marks">
+                            9/10
+                        </span>
+
+                    </div>
+
+                    <div class="assignment">
+
+                        <div class="assignment-number">
+                            02
+                        </div>
+
+                        <div class="assignment-info">
+
+                            <h4>Web Development Assignment</h4>
+
+                            <p>Fetch API and JSON</p>
+
+                            <small>Submitted: 01 Oct 2026</small>
+
+                        </div>
+
+                        <span class="status completed">
+                            ✓ Completed
+                        </span>
+
+                        <span class="marks">
+                            10/10
+                        </span>
+
+                    </div>
+
+                    <div class="assignment">
+
+                        <div class="assignment-number">
+                            03
+                        </div>
+
+                        <div class="assignment-info">
+
+                            <h4>Database Assignment</h4>
+
+                            <p>SQL and Database Management</p>
+
+                            <small>Due: 08 Oct 2026</small>
+
+                        </div>
+
+                        <span class="status pending">
+                            ⏳ Pending
+                        </span>
+
+                    </div>
+
+                    <div class="assignment">
+
+                        <div class="assignment-number">
+                            04
+                        </div>
+
+                        <div class="assignment-info">
+
+                            <h4>Computer Networks Practical</h4>
+
+                            <p>GNS3 Network Configuration</p>
+
+                            <small>Submitted: 29 Sep 2026</small>
+
+                        </div>
+
+                        <span class="status completed">
+                            ✓ Completed
+                        </span>
+
+                        <span class="marks">
+                            8/10
+                        </span>
+
+                    </div>
+
+                    <div class="assignment">
+
+                        <div class="assignment-number">
+                            05
+                        </div>
+
+                        <div class="assignment-info">
+
+                            <h4>Data Structures Assignment</h4>
+
+                            <p>Linked List and Trees</p>
+
+                            <small>Due: 10 Oct 2026</small>
+
+                        </div>
+
+                        <span class="status pending">
+                            ⏳ Pending
+                        </span>
+
+                    </div>
+
+                    <div class="assignment">
+
+                        <div class="assignment-number">
+                            06
+                        </div>
+
+                        <div class="assignment-info">
+
+                            <h4>Java Exception Handling</h4>
+
+                            <p>Custom Exception Practical</p>
+
+                            <small>Submitted: 26 Sep 2026</small>
+
+                        </div>
+
+                        <span class="status completed">
+                            ✓ Completed
+                        </span>
+
+                        <span class="marks">
+                            9/10
+                        </span>
+
+                    </div>
+
+                    <div class="assignment">
+
+                        <div class="assignment-number">
+                            07
+                        </div>
+
+                        <div class="assignment-info">
+
+                            <h4>HTML5 Registration Form</h4>
+
+                            <p>HTML5 and JavaScript Validation</p>
+
+                            <small>Submitted: 24 Sep 2026</small>
+
+                        </div>
+
+                        <span class="status completed">
+                            ✓ Completed
+                        </span>
+
+                        <span class="marks">
+                            10/10
+                        </span>
+
+                    </div>
+
+                    <div class="assignment">
+
+                        <div class="assignment-number">
+                            08
+                        </div>
+
+                        <div class="assignment-info">
+
+                            <h4>Thread Pool Practical</h4>
+
+                            <p>Java Concurrency and ExecutorService</p>
+
+                            <small>In progress</small>
+
+                        </div>
+
+                        <span class="status in-progress">
+                            ◉ In Progress
+                        </span>
+
+                    </div>
+
+                    <div class="assignment">
+
+                        <div class="assignment-number">
+                            09
+                        </div>
+
+                        <div class="assignment-info">
+
+                            <h4>PHP Form Validation</h4>
+
+                            <p>Server Side Form Processing</p>
+
+                            <small>Submitted: 20 Sep 2026</small>
+
+                        </div>
+
+                        <span class="status completed">
+                            ✓ Completed
+                        </span>
+
+                        <span class="marks">
+                            9/10
+                        </span>
+
+                    </div>
+
+                    <div class="assignment">
+
+                        <div class="assignment-number">
+                            10
+                        </div>
+
+                        <div class="assignment-info">
+
+                            <h4>Fetch API Practical</h4>
+
+                            <p>External JSON Data Rendering</p>
+
+                            <small>Due: 12 Oct 2026</small>
+
+                        </div>
+
+                        <span class="status pending">
+                            ⏳ Pending
+                        </span>
+
+                    </div>
+
+                    <div class="assignment">
+
+                        <div class="assignment-number">
+                            11
+                        </div>
+
+                        <div class="assignment-info">
+
+                            <h4>OOP MiniBank Project</h4>
+
+                            <p>Java Object-Oriented Programming</p>
+
+                            <small>Submitted: 18 Sep 2026</small>
+
+                        </div>
+
+                        <span class="status completed">
+                            ✓ Completed
+                        </span>
+
+                        <span class="marks">
+                            10/10
+                        </span>
+
+                    </div>
+
+                    <div class="assignment">
+
+                        <div class="assignment-number">
+                            12
+                        </div>
+
+                        <div class="assignment-info">
+
+                            <h4>Networking Lab Practical</h4>
+
+                            <p>Network Topology and Configuration</p>
+
+                            <small>Due: 15 Oct 2026</small>
+
+                        </div>
+
+                        <span class="status pending">
+                            ⏳ Pending
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <section class="bottom-grid">
+
+            <div class="bottom-card">
+
+                <h2 class="section-title">
+                    🕐 Recent Activity
+                </h2>
+
+                <div class="activity-list">
+
+                    <div class="activity">
+
+                        <div class="activity-icon">
+                            ✓
+                        </div>
+
+                        <p>
+                            Web Development assignment submitted
+                        </p>
+
+                    </div>
+
+                    <div class="activity">
+
+                        <div class="activity-icon">
+                            ✓
+                        </div>
+
+                        <p>
+                            Java practical completed
+                        </p>
+
+                    </div>
+
+                    <div class="activity">
+
+                        <div class="activity-icon">
+                            ✓
+                        </div>
+
+                        <p>
+                            Profile information updated
+                        </p>
+
+                    </div>
+
+                    <div class="activity">
+
+                        <div class="activity-icon">
+                            ✓
+                        </div>
+
+                        <p>
+                            StudentHub account activated
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="bottom-card">
+
+                <h2 class="section-title">
+                    ⚡ Quick Actions
+                </h2>
+
+                <div class="quick-actions">
+
+                    <a href="profile.html">
+                        View Profile
+                    </a>
+
+                    <a href="events.html">
+                        View Events
+                    </a>
+
+                    <a href="feedback.html">
+                        Give Feedback
+                    </a>
+
+                    <a href="contact.html">
+                        Contact Support
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer>
+
+        <p>
+            &copy; 2026 StudentHub Portal | Designed for Students
+        </p>
+
+    </footer>
+
+    <script src="scriptcomman.js"></script>
 
 </body>
+
 </html>

@@ -1,0 +1,152 @@
+[
+  {
+    "id": 1,
+    "enrollment": "25CS068",
+    "name": "Krisha Patel",
+    "department": "CE",
+    "year": 2,
+    "email": "krisha@example.com",
+    "mobile": "9876543210",
+    "city": "Ahmedabad"
+  },
+  {
+    "id": 2,
+    "enrollment": "25CS069",
+    "name": "Diya Shah",
+    "department": "CSE",
+    "year": 2,
+    "email": "diya@example.com",
+    "mobile": "9876543211",
+    "city": "Surat"
+  },
+  {
+    "id": 3,
+    "enrollment": "25IT070",
+    "name": "Rohan Mehta",
+    "department": "IT",
+    "year": 3,
+    "email": "rohan@example.com",
+    "mobile": "9876543212",
+    "city": "Vadodara"
+  },
+  {
+    "id": 4,
+    "enrollment": "25CE071",
+    "name": "Anaya Desai",
+    "department": "CE",
+    "year": 1,
+    "email": "anaya@example.com",
+    "mobile": "9876543213",
+    "city": "Rajkot"
+  },
+  {
+    "id": 5,
+    "enrollment": "25CS072",
+    "name": "Vivaan Patel",
+    "department": "CSE",
+    "year": 3,
+    "email": "vivaan@example.com",
+    "mobile": "9876543214",
+    "city": "Nadiad"
+  },
+  {
+    "id": 6,
+    "enrollment": "25IT073",
+    "name": "Isha Joshi",
+    "department": "IT",
+    "year": 2,
+    "email": "isha@example.com",
+    "mobile": "9876543215",
+    "city": "Ahmedabad"
+  },
+  {
+    "id": 7,
+    "enrollment": "25CE074",
+    "name": "Dhruv Shah",
+    "department": "CE",
+    "year": 4,
+    "email": "dhruv@example.com",
+    "mobile": "9876543216",
+    "city": "Surat"
+  },
+  {
+    "id": 8,
+    "enrollment": "25CS075",
+    "name": "Myra Patel",
+    "department": "CSE",
+    "year": 1,
+    "email": "myra@example.com",
+    "mobile": "9876543217",
+    "city": "Anand"
+  },
+  {
+    "id": 9,
+    "enrollment": "25IT076",
+    "name": "Yash Mehta",
+    "department": "IT",
+    "year": 3,
+    "email": "yash@example.com",
+    "mobile": "9876543218",
+    "city": "Vadodara"
+  },
+  {
+    "id": 10,
+    "enrollment": "25CE077",
+    "name": "Kiara Shah",
+    "department": "CE",
+    "year": 2,
+    "email": "kiara@example.com",
+    "mobile": "9876543219",
+    "city": "Rajkot"
+  },
+  {
+    "id": 11,
+    "enrollment": "25CS078",
+    "name": "Aryan Desai",
+    "department": "CSE",
+    "year": 4,
+    "email": "aryan@example.com",
+    "mobile": "9876543220",
+    "city": "Surat"
+  },
+  {
+    "id": 12,
+    "enrollment": "25IT079",
+    "name": "Avni Joshi",
+    "department": "IT",
+    "year": 1,
+    "email": "avni@example.com",
+    "mobile": "9876543221",
+    "city": "Ahmedabad"
+  },
+  {
+    "id": 13,
+    "enrollment": "25CE080",
+    "name": "Krish Patel",
+    "department": "CE",
+    "year": 3,
+    "email": "krish@example.com",
+    "mobile": "9876543222",
+    "city": "Nadiad"
+  },
+  {
+    "id": 14,
+    "enrollment": "25CS081",
+    "name": "Sara Mehta",
+    "department": "CSE",
+    "year": 2,
+    "email": "sara@example.com",
+    "mobile": "9876543223",
+    "city": "Anand"
+  },
+  {
+    "id": 15,
+    "enrollment": "25IT082",
+    "name": "Dev Shah",
+    "department": "IT",
+    "year": 4,
+    "email": "dev@example.com",
+    "mobile": "9876543224",
+    "city": "Vadodara"
+  }
+]
