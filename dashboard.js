@@ -1,273 +1,370 @@
-let students = [];
+(function () {
 
-const studentsContainer =
-    document.getElementById("studentsContainer");
+    let students = [];
+    let currentPage = 1;
 
-const studentSearch =
-    document.getElementById("studentSearch");
-
-const departmentFilter =
-    document.getElementById("departmentFilter");
-
-const yearFilter =
-    document.getElementById("yearFilter");
-
-const sortSelect =
-    document.getElementById("sortSelect");
+    const studentsPerPage = 6;
 
 
-// Load students from JSON
+    document.addEventListener("DOMContentLoaded", function () {
 
-async function loadStudents() {
+        const studentsContainer =
+            document.getElementById("studentsContainer");
 
-    try {
+        const studentSearch =
+            document.getElementById("studentSearch");
 
-        studentsContainer.innerHTML =
-            '<div class="message">Loading students...</div>';
+        const departmentFilter =
+            document.getElementById("departmentFilter");
+
+        const yearFilter =
+            document.getElementById("yearFilter");
+
+        const sortSelect =
+            document.getElementById("sortSelect");
+
+        const pagination =
+            document.getElementById("pagination");
 
 
-        const response =
-            await fetch("students.json");
+        async function loadStudents() {
 
+            studentsContainer.innerHTML =
+                '<div class="message">Loading students...</div>';
 
-        if (!response.ok) {
+            try {
 
-            throw new Error("Failed to load students");
+                await new Promise(function (resolve) {
+                    setTimeout(resolve, 3000);
+                });
 
+                const response =
+                    await fetch("students.json");
+
+                if (!response.ok) {
+                    throw new Error("students.json not found");
+                }
+
+                students = await response.json();
+
+                displayStudents();
+
+            } catch (error) {
+
+                studentsContainer.innerHTML = `
+                    <div class="message">
+                        <h3>Unable to Load Students</h3>
+                        <p>
+                            Please make sure that students.json
+                            is in the same folder as dashboard.html.
+                        </p>
+                    </div>
+                `;
+
+                pagination.innerHTML = "";
+
+                console.error(error);
+            }
         }
 
 
-        students =
-            await response.json();
+        function getFilteredStudents() {
+
+            let result = [...students];
+
+            const searchText =
+                studentSearch.value.toLowerCase().trim();
+
+            const department =
+                departmentFilter.value;
+
+            const year =
+                yearFilter.value;
+
+            const sortValue =
+                sortSelect.value;
 
 
-        displayStudents();
+            if (searchText !== "") {
 
-    }
+                result = result.filter(function (student) {
 
-    catch (error) {
+                    return (
+                        student.name.toLowerCase().includes(searchText) ||
+                        student.email.toLowerCase().includes(searchText) ||
+                        student.city.toLowerCase().includes(searchText)
+                    );
 
-        studentsContainer.innerHTML =
-            '<div class="message">❌ Error loading student data.</div>';
-
-        console.error(error);
-
-    }
-
-}
+                });
+            }
 
 
-// Filter and sort students
+            if (department !== "all") {
 
-function getFilteredStudents() {
+                result = result.filter(function (student) {
 
-    let result = [...students];
+                    return student.department === department;
 
-
-    const searchText =
-        studentSearch.value.toLowerCase().trim();
-
-
-    const department =
-        departmentFilter.value;
+                });
+            }
 
 
-    const year =
-        yearFilter.value;
+            if (year !== "all") {
+
+                result = result.filter(function (student) {
+
+                    return String(student.year) === String(year);
+
+                });
+            }
 
 
-    const sortValue =
-        sortSelect.value;
+            if (sortValue === "nameAsc") {
+
+                result.sort(function (a, b) {
+
+                    return a.name.localeCompare(b.name);
+
+                });
+            }
 
 
-    // Search
+            if (sortValue === "nameDesc") {
 
-    if (searchText) {
+                result.sort(function (a, b) {
 
-        result = result.filter(function(student) {
+                    return b.name.localeCompare(a.name);
 
-            return (
+                });
+            }
 
-                student.name
-                    .toLowerCase()
-                    .includes(searchText)
 
-                ||
+            return result;
+        }
 
-                student.email
-                    .toLowerCase()
-                    .includes(searchText)
 
-                ||
+        function displayStudents() {
 
-                student.city
-                    .toLowerCase()
-                    .includes(searchText)
+            const result = getFilteredStudents();
 
-            );
+
+            if (result.length === 0) {
+
+                studentsContainer.innerHTML = `
+                    <div class="message">
+                        <h3>No students found</h3>
+                        <p>Try another search or filter.</p>
+                    </div>
+                `;
+
+                pagination.innerHTML = "";
+
+                return;
+            }
+
+
+            const totalPages =
+                Math.ceil(result.length / studentsPerPage);
+
+
+            if (currentPage > totalPages) {
+                currentPage = totalPages;
+            }
+
+
+            const start =
+                (currentPage - 1) * studentsPerPage;
+
+            const end =
+                start + studentsPerPage;
+
+
+            const pageStudents =
+                result.slice(start, end);
+
+
+            studentsContainer.innerHTML =
+                pageStudents.map(function (student) {
+
+                    return `
+                        <div class="student-card">
+
+                            <div class="student-card-header">
+
+                                <div class="student-avatar">
+                                    ${student.name
+                                        .split(" ")
+                                        .map(function (word) {
+                                            return word.charAt(0);
+                                        })
+                                        .join("")
+                                        .substring(0, 2)
+                                        .toUpperCase()}
+                                </div>
+
+                                <div>
+
+                                    <h3>${student.name}</h3>
+
+                                    <span class="department">
+                                        ${student.department}
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                            <div class="student-details">
+
+                                <p>
+                                    <b>Enrollment:</b>
+                                    ${student.enrollment || "N/A"}
+                                </p>
+
+                                <p>
+                                    <b>Year:</b>
+                                    ${student.year}
+                                </p>
+
+                                <p>
+                                    <b>Email:</b>
+                                    ${student.email}
+                                </p>
+
+                                <p>
+                                    <b>City:</b>
+                                    ${student.city}
+                                </p>
+
+                            </div>
+
+                        </div>
+                    `;
+
+                }).join("");
+
+
+            displayPagination(totalPages);
+        }
+
+
+        function displayPagination(totalPages) {
+
+            pagination.innerHTML = "";
+
+
+            if (totalPages <= 1) {
+                return;
+            }
+
+
+            const previous =
+                document.createElement("button");
+
+            previous.textContent = "Previous";
+
+            previous.disabled =
+                currentPage === 1;
+
+
+            previous.addEventListener("click", function () {
+
+                currentPage--;
+
+                displayStudents();
+
+            });
+
+
+            pagination.appendChild(previous);
+
+
+            for (let i = 1; i <= totalPages; i++) {
+
+                const button =
+                    document.createElement("button");
+
+                button.textContent = i;
+
+
+                if (i === currentPage) {
+                    button.classList.add("active");
+                }
+
+
+                button.addEventListener("click", function () {
+
+                    currentPage = i;
+
+                    displayStudents();
+
+                });
+
+
+                pagination.appendChild(button);
+            }
+
+
+            const next =
+                document.createElement("button");
+
+            next.textContent = "Next";
+
+            next.disabled =
+                currentPage === totalPages;
+
+
+            next.addEventListener("click", function () {
+
+                currentPage++;
+
+                displayStudents();
+
+            });
+
+
+            pagination.appendChild(next);
+        }
+
+
+        studentSearch.addEventListener("input", function () {
+
+            currentPage = 1;
+
+            displayStudents();
 
         });
 
-    }
 
+        departmentFilter.addEventListener("change", function () {
 
-    // Department filter
+            currentPage = 1;
 
-    if (department !== "all") {
-
-        result = result.filter(function(student) {
-
-            return student.department === department;
+            displayStudents();
 
         });
 
-    }
 
+        yearFilter.addEventListener("change", function () {
 
-    // Year filter
+            currentPage = 1;
 
-    if (year !== "all") {
-
-        result = result.filter(function(student) {
-
-            return student.year == year;
+            displayStudents();
 
         });
 
-    }
 
+        sortSelect.addEventListener("change", function () {
 
-    // Sorting
+            currentPage = 1;
 
-    if (sortValue === "nameAsc") {
-
-        result.sort(function(a, b) {
-
-            return a.name.localeCompare(b.name);
+            displayStudents();
 
         });
 
-    }
 
+        loadStudents();
 
-    if (sortValue === "nameDesc") {
+    });
 
-        result.sort(function(a, b) {
-
-            return b.name.localeCompare(a.name);
-
-        });
-
-    }
-
-
-    return result;
-
-}
-
-
-// Display students
-
-function displayStudents() {
-
-    const result =
-        getFilteredStudents();
-
-
-    if (result.length === 0) {
-
-        studentsContainer.innerHTML = `
-
-            <div class="message">
-
-                <h3>No students found</h3>
-
-                <p>
-                    Try another search or filter.
-                </p>
-
-            </div>
-
-        `;
-
-        return;
-
-    }
-
-
-    studentsContainer.innerHTML =
-        result.map(function(student) {
-
-            return `
-
-                <div class="student-card">
-
-                    <h3>${student.name}</h3>
-
-                    <span class="department">
-                        ${student.department}
-                    </span>
-
-                    <p>
-                        <b>Year:</b>
-                        ${student.year}
-                    </p>
-
-                    <p>
-                        <b>Email:</b>
-                        ${student.email}
-                    </p>
-
-                    <p>
-                        <b>City:</b>
-                        ${student.city}
-                    </p>
-
-                </div>
-
-            `;
-
-        }).join("");
-
-}
-
-
-// Search event
-
-studentSearch.addEventListener("input", function() {
-
-    displayStudents();
-
-});
-
-
-// Department filter
-
-departmentFilter.addEventListener("change", function() {
-
-    displayStudents();
-
-});
-
-
-// Year filter
-
-yearFilter.addEventListener("change", function() {
-
-    displayStudents();
-
-});
-
-
-// Sort
-
-sortSelect.addEventListener("change", function() {
-
-    displayStudents();
-
-});
-
-
-// Start loading
-
-loadStudents();
+})();

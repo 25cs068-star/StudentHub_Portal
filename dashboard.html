@@ -587,6 +587,185 @@
 
         }
 
+
+        .student-directory {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,.12);
+            margin-bottom: 25px;
+        }
+
+        .student-controls {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .student-controls input,
+        .student-controls select {
+            padding: 12px 15px;
+            border: 1px solid #d5dce3;
+            border-radius: 10px;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .student-controls input {
+            flex: 1;
+            min-width: 220px;
+        }
+
+        .student-controls select {
+            min-width: 170px;
+            background: white;
+        }
+
+        .student-controls input:focus,
+        .student-controls select:focus {
+            border-color: #0077b6;
+        }
+
+        .student-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .student-card {
+            padding: 22px;
+            background: #f8fbff;
+            border: 1px solid #d5dce3;
+            border-radius: 16px;
+            transition: .3s;
+        }
+
+        .student-card:hover {
+            transform: translateY(-4px);
+            border-color: #00b4d8;
+            box-shadow: 0 6px 15px rgba(0,119,182,.12);
+        }
+
+        .student-card h3 {
+            color: #003566;
+            margin-bottom: 8px;
+        }
+
+        .student-card .department {
+            display: inline-block;
+            background: #e8f6fb;
+            color: #0077b6;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .student-card p {
+            margin: 7px 0;
+            color: #555;
+            font-size: 14px;
+        }
+
+        .student-card p b {
+            color: #0077b6;
+        }
+
+        .student-message {
+            background: #f8fbff;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            color: #555;
+            grid-column: 1 / -1;
+        }
+
+        .student-pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            margin-top: 22px;
+            flex-wrap: wrap;
+        }
+
+        .student-pagination button {
+            padding: 9px 14px;
+            border: 1px solid #d5dce3;
+            border-radius: 8px;
+            background: white;
+            color: #003566;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .student-pagination button:hover:not(:disabled),
+        .student-pagination button.active {
+            background: #0077b6;
+            color: white;
+            border-color: #0077b6;
+        }
+
+        .student-pagination button:disabled {
+            opacity: .5;
+            cursor: not-allowed;
+        }
+
+        body.dark-mode .student-directory {
+            background: #1e1e1e;
+            color: #eeeeee;
+        }
+
+        body.dark-mode .student-controls input,
+        body.dark-mode .student-controls select {
+            background: #252525;
+            color: #eeeeee;
+            border-color: #444;
+        }
+
+        body.dark-mode .student-card,
+        body.dark-mode .student-message {
+            background: #252525;
+            border-color: #444;
+        }
+
+        body.dark-mode .student-card h3 {
+            color: #00b4d8;
+        }
+
+        body.dark-mode .student-card p {
+            color: #cccccc;
+        }
+
+        body.dark-mode .student-pagination button {
+            background: #252525;
+            color: #eeeeee;
+            border-color: #444;
+        }
+
+        @media(max-width: 900px) {
+            .student-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media(max-width: 600px) {
+            .student-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .student-controls {
+                flex-direction: column;
+            }
+
+            .student-controls input,
+            .student-controls select {
+                width: 100%;
+            }
+        }
+
     </style>
 
 </head>
@@ -1165,6 +1344,56 @@
 
         </section>
 
+
+        
+
+        <section class="student-directory">
+
+            <h2 class="section-title">
+                👥 Student Directory
+            </h2>
+
+            <div class="student-controls">
+
+                <input
+                    type="text"
+                    id="studentSearch"
+                    placeholder="🔍 Search student..."
+                >
+
+                <select id="departmentFilter">
+                    <option value="all">All Departments</option>
+                    <option value="CE">CE</option>
+                    <option value="CSE">CSE</option>
+                    <option value="IT">IT</option>
+                </select>
+
+                <select id="yearFilter">
+                    <option value="all">All Years</option>
+                    <option value="1">Year 1</option>
+                    <option value="2">Year 2</option>
+                    <option value="3">Year 3</option>
+                    <option value="4">Year 4</option>
+                </select>
+
+                <select id="sortSelect">
+                    <option value="default">Sort By</option>
+                    <option value="nameAsc">Name A-Z</option>
+                    <option value="nameDesc">Name Z-A</option>
+                </select>
+
+            </div>
+
+            <div id="studentsContainer" class="student-grid">
+                <div class="student-message">
+                    Loading students...
+                </div>
+            </div>
+
+            <div id="pagination" class="student-pagination"></div>
+
+        </section>
+
         <section class="bottom-grid">
 
             <div class="bottom-card">
@@ -1266,6 +1495,8 @@
         </p>
 
     </footer>
+
+    <script src="dashboard.js"></script>
 
     <script src="scriptcomman.js"></script>
 

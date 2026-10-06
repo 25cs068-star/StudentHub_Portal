@@ -17,6 +17,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
     async function loadEvents() {
 
+        eventsContainer.innerHTML = `
+            <div class="message">
+                <h3>Loading Events...</h3>
+                <p>Please wait while events are being loaded.</p>
+            </div>
+        `;
+
+        await new Promise(function (resolve) {
+            setTimeout(resolve, 3000);
+        });
+
+
         try {
 
             const response = await fetch("events.json");
@@ -46,6 +58,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             resultInfo.textContent = "";
             pagination.innerHTML = "";
+
         }
 
     }

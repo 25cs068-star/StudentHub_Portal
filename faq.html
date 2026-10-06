@@ -12,15 +12,12 @@
 
     <style>
 
-        /* ================= FAQ PAGE ================= */
-
         .faq-container {
             width: 92%;
             max-width: 1100px;
             margin: 40px auto;
         }
 
-        /* ================= HERO ================= */
 
         .faq-hero {
             background: linear-gradient(135deg, #ffffff, #f4faff);
@@ -31,11 +28,13 @@
             margin-bottom: 25px;
         }
 
+
         .faq-hero h2 {
             font-size: 36px;
             color: #003566;
             margin-bottom: 12px;
         }
+
 
         .faq-hero p {
             color: #555;
@@ -43,7 +42,6 @@
             line-height: 1.6;
         }
 
-        /* ================= FAQ CARD ================= */
 
         .faq-card {
             background: white;
@@ -52,10 +50,12 @@
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
         }
 
+
         .faq-heading {
             text-align: center;
             margin-bottom: 25px;
         }
+
 
         .faq-heading h2 {
             color: #003566;
@@ -63,16 +63,17 @@
             margin-bottom: 8px;
         }
 
+
         .faq-heading p {
             color: #666;
         }
 
-        /* ================= SEARCH ================= */
 
         .search-box {
             position: relative;
             margin-bottom: 25px;
         }
+
 
         #searchInput {
             width: 100%;
@@ -83,7 +84,9 @@
             outline: none;
             background: #f8fbff;
             transition: 0.3s;
+            box-sizing: border-box;
         }
+
 
         #searchInput:focus {
             border-color: #0077b6;
@@ -91,7 +94,6 @@
             box-shadow: 0 0 0 4px rgba(0, 119, 182, 0.1);
         }
 
-        /* ================= FAQ WELCOME ================= */
 
         .welcome-box {
             background: linear-gradient(135deg, #eaf7ff, #f8fbff);
@@ -101,24 +103,26 @@
             text-align: center;
         }
 
+
         .welcome-box h3 {
             color: #003566;
             font-size: 25px;
             margin-bottom: 10px;
         }
 
+
         .welcome-box p {
             color: #666;
             margin-bottom: 25px;
         }
 
-        /* ================= CATEGORY BUTTONS ================= */
 
         .category-buttons {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
             gap: 12px;
         }
+
 
         .category-buttons button {
             border: 1px solid #d4e3ed;
@@ -132,6 +136,7 @@
             transition: 0.3s;
         }
 
+
         .category-buttons button:hover {
             background: #0077b6;
             color: white;
@@ -140,20 +145,21 @@
             box-shadow: 0 7px 15px rgba(0, 119, 182, 0.2);
         }
 
-        /* ================= RESULT HEADER ================= */
 
         .result-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             gap: 15px;
         }
+
 
         .result-header h3 {
             color: #003566;
             font-size: 23px;
         }
+
 
         .result-header button {
             border: none;
@@ -166,17 +172,41 @@
             transition: 0.3s;
         }
 
+
         .result-header button:hover {
             background: #0077b6;
             color: white;
         }
 
-        /* ================= FAQ LIST ================= */
+
+        .faq-controls {
+            margin-bottom: 15px;
+        }
+
+
+        #sortSelect {
+            width: 220px;
+            padding: 12px 15px;
+            border: 2px solid #d9e5ef;
+            border-radius: 12px;
+            background: #f8fbff;
+            color: #003566;
+            font-size: 15px;
+            outline: none;
+            cursor: pointer;
+        }
+
+
+        #sortSelect:focus {
+            border-color: #0077b6;
+        }
+
 
         .faq-list {
             display: grid;
             gap: 12px;
         }
+
 
         .faq-item {
             background: white;
@@ -186,10 +216,12 @@
             transition: 0.3s;
         }
 
+
         .faq-item:hover {
             border-color: #9bcde5;
             box-shadow: 0 5px 15px rgba(0, 119, 182, 0.08);
         }
+
 
         .faq-question {
             width: 100%;
@@ -207,9 +239,11 @@
             transition: 0.3s;
         }
 
+
         .faq-question:hover {
             background: #edf8ff;
         }
+
 
         .faq-question b {
             min-width: 28px;
@@ -221,8 +255,8 @@
             background: #0077b6;
             color: white;
             font-size: 20px;
-            transition: 0.3s;
         }
+
 
         .faq-answer {
             display: none;
@@ -233,11 +267,11 @@
             border-top: 1px solid #e1e8ed;
         }
 
+
         .faq-answer.show {
             display: block;
         }
 
-        /* ================= NO RESULT ================= */
 
         .no-result {
             text-align: center;
@@ -247,31 +281,72 @@
             border: 1px solid #dce6ed;
         }
 
+
         .no-result h3 {
             color: #003566;
             margin-bottom: 8px;
         }
 
+
         .no-result p {
             color: #666;
         }
 
-        /* ================= DARK MODE ================= */
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+
+
+        .pagination button {
+            border: 1px solid #d4e3ed;
+            background: white;
+            color: #003566;
+            min-width: 40px;
+            padding: 10px 14px;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+
+        .pagination button:hover:not(:disabled),
+        .pagination button.active {
+            background: #0077b6;
+            color: white;
+            border-color: #0077b6;
+        }
+
+
+        .pagination button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
 
         body.dark-mode .faq-hero,
         body.dark-mode .faq-card {
             background: #1e1e1e;
         }
 
+
         body.dark-mode .faq-hero h2,
         body.dark-mode .faq-heading h2 {
             color: #00b4d8;
         }
 
+
         body.dark-mode .faq-hero p,
         body.dark-mode .faq-heading p {
             color: #ccc;
         }
+
 
         body.dark-mode #searchInput {
             background: #252525;
@@ -279,22 +354,27 @@
             color: white;
         }
 
+
         body.dark-mode #searchInput::placeholder {
             color: #aaa;
         }
+
 
         body.dark-mode .welcome-box {
             background: #252525;
             border-color: #444;
         }
 
+
         body.dark-mode .welcome-box h3 {
             color: #00b4d8;
         }
 
+
         body.dark-mode .welcome-box p {
             color: #ccc;
         }
+
 
         body.dark-mode .category-buttons button {
             background: #252525;
@@ -302,33 +382,47 @@
             border-color: #444;
         }
 
+
         body.dark-mode .category-buttons button:hover {
             background: #0077b6;
             border-color: #0077b6;
         }
 
+
         body.dark-mode .result-header h3 {
             color: #00b4d8;
         }
+
 
         body.dark-mode .result-header button {
             background: #333;
             color: #00b4d8;
         }
 
+
+        body.dark-mode #sortSelect {
+            background: #252525;
+            border-color: #444;
+            color: white;
+        }
+
+
         body.dark-mode .faq-item {
             background: #252525;
             border-color: #444;
         }
+
 
         body.dark-mode .faq-question {
             background: #252525;
             color: white;
         }
 
+
         body.dark-mode .faq-question:hover {
             background: #333;
         }
+
 
         body.dark-mode .faq-answer {
             background: #1e1e1e;
@@ -336,20 +430,36 @@
             border-color: #444;
         }
 
+
         body.dark-mode .no-result {
             background: #252525;
             border-color: #444;
         }
 
+
         body.dark-mode .no-result h3 {
             color: #00b4d8;
         }
+
 
         body.dark-mode .no-result p {
             color: #ccc;
         }
 
-        /* ================= RESPONSIVE ================= */
+
+        body.dark-mode .pagination button {
+            background: #252525;
+            color: white;
+            border-color: #444;
+        }
+
+
+        body.dark-mode .pagination button:hover:not(:disabled),
+        body.dark-mode .pagination button.active {
+            background: #0077b6;
+            color: white;
+        }
+
 
         @media(max-width: 900px) {
 
@@ -358,6 +468,7 @@
             }
 
         }
+
 
         @media(max-width: 768px) {
 
@@ -383,6 +494,7 @@
             }
 
         }
+
 
         @media(max-width: 500px) {
 
@@ -412,6 +524,10 @@
                 align-items: flex-start;
             }
 
+            #sortSelect {
+                width: 100%;
+            }
+
             .faq-question {
                 font-size: 15px;
                 padding: 16px;
@@ -426,7 +542,6 @@
 
 <body>
 
-    <!-- ================= HEADER ================= -->
 
     <header>
 
@@ -454,23 +569,14 @@
         <nav>
 
             <a href="index.html">Home</a>
-
             <a href="about.html">About</a>
-
             <a href="register.html">Register</a>
-
             <a href="login.html">Login</a>
-
             <a href="dashboard.html">Dashboard</a>
-
             <a href="events.html">Events</a>
-
             <a href="profile.html">Profile</a>
-
             <a href="contact.html">Contact</a>
-
             <a href="faq.html">FAQ</a>
-
             <a href="feedback.html">Feedback</a>
 
         </nav>
@@ -478,16 +584,14 @@
     </header>
 
 
-    <!-- ================= MAIN ================= -->
-
     <main class="faq-container">
 
 
-        <!-- HERO -->
-
         <section class="faq-hero">
 
-            <h2>Frequently Asked Questions ❓</h2>
+            <h2>
+                Frequently Asked Questions ❓
+            </h2>
 
             <p>
                 Find quick answers to the most common questions
@@ -497,13 +601,14 @@
         </section>
 
 
-        <!-- FAQ SECTION -->
-
         <section class="faq-card">
+
 
             <div class="faq-heading">
 
-                <h2>How can we help you?</h2>
+                <h2>
+                    How can we help you?
+                </h2>
 
                 <p>
                     Search your question or select a topic to explore.
@@ -511,8 +616,6 @@
 
             </div>
 
-
-            <!-- SEARCH -->
 
             <div class="search-box">
 
@@ -525,20 +628,20 @@
             </div>
 
 
-            <!-- FAQ CONTENT -->
-
             <div id="faqContainer">
 
-                <p>Loading FAQs...</p>
+                <p>
+                    Loading FAQs...
+                </p>
 
             </div>
 
+
         </section>
+
 
     </main>
 
-
-    <!-- ================= FOOTER ================= -->
 
     <footer>
 
@@ -549,11 +652,10 @@
     </footer>
 
 
-    <!-- ================= JAVASCRIPT ================= -->
-
     <script src="faq.js"></script>
 
     <script src="scriptcomman.js"></script>
+
 
 </body>
 
