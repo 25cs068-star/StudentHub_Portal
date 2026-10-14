@@ -1,4 +1,6 @@
+
 <?php
+session_start();
 
 if ($_SERVER["REQUEST_METHOD"] !== "POST") {
     header("Location: register.php");
@@ -18,19 +20,19 @@ $confirmPassword = $_POST["confirmPassword"] ?? "";
 $errors = [];
 
 if ($fullName === "" || !preg_match("/^[A-Za-z ]{2,50}$/", $fullName)) {
-    $errors[] = "Invalid full name.";
+    $errors[] = "Please enter a valid full name.";
 }
 
 if ($enrollment === "" || !preg_match("/^(?:[Dd])?[0-9]{2}[A-Za-z]{2,4}[0-9]{2,4}$/", $enrollment)) {
-    $errors[] = "Invalid enrollment number.";
+    $errors[] = "Please enter a valid enrollment number.";
 }
 
 if ($email === "" || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    $errors[] = "Invalid email address.";
+    $errors[] = "Please enter a valid email address.";
 }
 
 if ($mobile === "" || !preg_match("/^[6-9][0-9]{9}$/", $mobile)) {
-    $errors[] = "Invalid mobile number.";
+    $errors[] = "Please enter a valid 10-digit mobile number.";
 }
 
 $allowedDepartments = [
@@ -42,35 +44,23 @@ $allowedDepartments = [
 ];
 
 if (!in_array($department, $allowedDepartments, true)) {
-    $errors[] = "Invalid department.";
+    $errors[] = "Please select a valid department.";
 }
 
-$allowedYears = [
-    "1st Year",
-    "2nd Year",
-    "3rd Year",
-    "4th Year"
-];
+$allowedYears = ["1st Year", "2nd Year", "3rd Year", "4th Year"];
 
 if (!in_array($year, $allowedYears, true)) {
-    $errors[] = "Invalid year.";
+    $errors[] = "Please select a valid year.";
 }
 
-$allowedGenders = [
-    "Male",
-    "Female",
-    "Other"
-];
+$allowedGenders = ["Male", "Female", "Other"];
 
 if (!in_array($gender, $allowedGenders, true)) {
-    $errors[] = "Invalid gender.";
+    $errors[] = "Please select your gender.";
 }
 
-if (!preg_match(
-    "/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@$!%*?&]).{8,}$/",
-    $password
-)) {
-    $errors[] = "Invalid password.";
+if (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@$!%*?&]).{8,}$/', $password)) {
+    $errors[] = "Password must contain at least 8 characters, including uppercase, lowercase, number and special character.";
 }
 
 if ($password !== $confirmPassword) {
@@ -82,63 +72,114 @@ if (!isset($_POST["terms"])) {
 }
 
 if (!empty($errors)) {
-
-    echo "<h2>Registration Failed</h2>";
-
-    foreach ($errors as $error) {
-        echo "<p>" . htmlspecialchars($error) . "</p>";
-    }
-
-    echo '<p><a href="register.php">Go Back</a></p>';
-
+    $_SESSION["registration_errors"] = $errors;
+    header("Location: register.php");
     exit();
 }
 
-$file = __DIR__ . "/data.csv";
+require_once __DIR__ . "/practical9_db.php";
 
-$isNewFile = !file_exists($file) || filesize($file) === 0;
+$check = $conn->prepare(
+    "SELECT id FROM users WHERE email = ? OR enrollment = ? LIMIT 1"
+);
 
-$handle = fopen($file, "a");
-
-if ($handle === false) {
-    die("Unable to open data.csv");
+if (!$check) {
+    error_log($conn->error);
+    $_SESSION["registration_errors"] = [
+        "Unable to check registration details. Please try again."
+    ];
+    header("Location: register.php");
+    exit();
 }
 
-if (!flock($handle, LOCK_EX)) {
-    fclose($handle);
-    die("Unable to lock data.csv");
+$check->bind_param("ss", $email, $enrollment);
+
+if (!$check->execute()) {
+    error_log($check->error);
+    $check->close();
+    $conn->close();
+
+    $_SESSION["registration_errors"] = [
+        "Unable to check registration details. Please try again."
+    ];
+    header("Location: register.php");
+    exit();
 }
 
-if ($isNewFile) {
-    fputcsv($handle, [
-        "Full Name",
-        "Enrollment",
-        "Email",
-        "Mobile",
-        "Department",
-        "Year",
-        "Gender",
-        "Password",
-        "Registered At"
-    ]);
+$check->store_result();
+
+if ($check->num_rows > 0) {
+    $check->close();
+    $conn->close();
+
+    $_SESSION["registration_errors"] = [
+        "This email address or enrollment number is already registered."
+    ];
+    header("Location: register.php");
+    exit();
 }
 
-fputcsv($handle, [
+$check->close();
+
+$hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+$stmt = $conn->prepare(
+    "INSERT INTO users
+    (username, email, password, enrollment, mobile, department, study_year, gender)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?)"
+);
+
+if (!$stmt) {
+    error_log($conn->error);
+    $conn->close();
+
+    $_SESSION["registration_errors"] = [
+        "Unable to save your registration. Please try again."
+    ];
+    header("Location: register.php");
+    exit();
+}
+
+$stmt->bind_param(
+    "ssssssss",
     $fullName,
-    $enrollment,
     $email,
+    $hashedPassword,
+    $enrollment,
     $mobile,
     $department,
     $year,
-    $gender,
-    $password,
-    date("Y-m-d H:i:s")
-]);
+    $gender
+);
 
-flock($handle, LOCK_UN);
-fclose($handle);
+if ($stmt->execute()) {
+    $stmt->close();
+    $conn->close();
 
-header("Location: register.php?success=1");
+    $_SESSION["registration_success"] =
+        "Registration Successfully Completed!";
+
+    header("Location: register.php");
+    exit();
+}
+
+$errorNumber = $stmt->errno;
+error_log($stmt->error);
+
+$stmt->close();
+$conn->close();
+
+if ($errorNumber === 1062) {
+    $_SESSION["registration_errors"] = [
+        "This email address or enrollment number is already registered, or another unique field conflicts."
+    ];
+} else {
+    $_SESSION["registration_errors"] = [
+        "Registration could not be completed. Please try again."
+    ];
+}
+
+
+header("Location: register.php");
 exit();
-
 ?>
