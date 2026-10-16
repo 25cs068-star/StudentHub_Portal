@@ -1,18 +1,76 @@
+
+<?php
+session_start();
+
+if (!isset($_SESSION["user_id"])) {
+    header("Location: login.php");
+    exit();
+}
+
+if (
+    !isset($_SESSION["last_activity"]) ||
+    time() - $_SESSION["last_activity"] > 300
+) {
+    $_SESSION = [];
+
+    if (ini_get("session.use_cookies")) {
+        $params = session_get_cookie_params();
+
+        setcookie(
+            session_name(),
+            "",
+            time() - 42000,
+            $params["path"],
+            $params["domain"],
+            $params["secure"],
+            $params["httponly"]
+        );
+    }
+
+    session_destroy();
+
+    header("Location: login.php?error=timeout");
+    exit();
+}
+
+$_SESSION["last_activity"] = time();
+
+if (strtolower($_SESSION["role"] ?? "") !== "student") {
+    http_response_code(403);
+    ?>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Unauthorized Access | StudentHub</title>
+        <link rel="stylesheet" href="csscommon.css">
+    </head>
+    <body>
+        <main style="max-width:600px;margin:80px auto;padding:30px;text-align:center;">
+            <h1>Unauthorized Access</h1>
+            <p>You do not have permission to access the Student Dashboard.</p>
+            <a href="admin_dashboard.php">Return to Admin Dashboard</a>
+        </main>
+    </body>
+    </html>
+    <?php
+    exit();
+}
+
+$username = $_SESSION["username"] ?? "Student";
+?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>StudentHub Portal - Dashboard</title>
 
     <link rel="stylesheet" href="csscommon.css">
 
     <style>
-
         .dashboard-container {
             width: 95%;
             max-width: 1200px;
@@ -25,7 +83,7 @@
             padding: 35px;
             border-radius: 20px;
             margin-bottom: 25px;
-            box-shadow: 0 5px 15px rgba(0,0,0,.15);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, .15);
         }
 
         .welcome h2 {
@@ -37,82 +95,16 @@
             font-size: 16px;
         }
 
-        .profile-section {
-            background: white;
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 5px 15px rgba(0,0,0,.12);
-            margin-bottom: 25px;
+        .current-date {
+            margin-top: 12px;
+            font-size: 16px;
+            font-weight: bold;
         }
 
         .section-title {
             color: #003566;
             margin-bottom: 20px;
             font-size: 24px;
-        }
-
-        .profile-layout {
-            display: grid;
-            grid-template-columns: 180px 1fr;
-            gap: 25px;
-            align-items: center;
-        }
-
-        .profile-user {
-            text-align: center;
-            padding: 20px;
-            background: #f4f9fd;
-            border-radius: 16px;
-        }
-
-        .profile-avatar {
-            width: 90px;
-            height: 90px;
-            margin: 0 auto 12px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #0077b6, #00b4d8);
-            color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 30px;
-            font-weight: bold;
-        }
-
-        .profile-user h3 {
-            color: #003566;
-            margin-bottom: 5px;
-        }
-
-        .profile-user p {
-            color: #666;
-            font-size: 14px;
-        }
-
-        .profile-details {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-        }
-
-        .profile-item {
-            padding: 16px;
-            background: #f8fbff;
-            border: 1px solid #d5dce3;
-            border-radius: 12px;
-        }
-
-        .profile-item span {
-            display: block;
-            color: #0077b6;
-            font-size: 13px;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-
-        .profile-item p {
-            font-weight: bold;
-            color: #333;
         }
 
         .dashboard-grid {
@@ -126,7 +118,7 @@
             background: white;
             padding: 30px;
             border-radius: 20px;
-            box-shadow: 0 5px 15px rgba(0,0,0,.12);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, .12);
         }
 
         .attendance-header {
@@ -229,7 +221,7 @@
             background: white;
             padding: 30px;
             border-radius: 20px;
-            box-shadow: 0 5px 15px rgba(0,0,0,.12);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, .12);
             margin-bottom: 25px;
         }
 
@@ -323,7 +315,7 @@
         .assignment:hover {
             transform: translateX(4px);
             border-color: #00b4d8;
-            box-shadow: 0 4px 12px rgba(0,119,182,.10);
+            box-shadow: 0 4px 12px rgba(0, 119, 182, .10);
         }
 
         .assignment-number {
@@ -400,7 +392,7 @@
             background: white;
             padding: 30px;
             border-radius: 20px;
-            box-shadow: 0 5px 15px rgba(0,0,0,.12);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, .12);
         }
 
         .activity-list {
@@ -460,7 +452,6 @@
         }
 
         body.dark-mode .welcome,
-        body.dark-mode .profile-section,
         body.dark-mode .dashboard-card,
         body.dark-mode .assignment-section,
         body.dark-mode .bottom-card {
@@ -469,21 +460,17 @@
         }
 
         body.dark-mode .section-title,
-        body.dark-mode .profile-user h3,
         body.dark-mode .attendance-header h3,
         body.dark-mode .academic-card strong {
             color: #00b4d8;
         }
 
-        body.dark-mode .profile-user,
-        body.dark-mode .profile-item,
         body.dark-mode .academic-card,
         body.dark-mode .assignment {
             background: #252525;
             border-color: #444;
         }
 
-        body.dark-mode .profile-item p,
         body.dark-mode .activity p,
         body.dark-mode .assignment-info p,
         body.dark-mode .assignment-info small,
@@ -527,20 +514,13 @@
         }
 
         @media(max-width: 900px) {
-
-            .profile-layout {
-                grid-template-columns: 1fr;
-            }
-
             .dashboard-grid,
             .bottom-grid {
                 grid-template-columns: 1fr;
             }
-
         }
 
         @media(max-width: 700px) {
-
             .assignment {
                 grid-template-columns: 50px 1fr;
             }
@@ -550,12 +530,9 @@
                 grid-column: 2;
                 justify-self: start;
             }
-
         }
 
         @media(max-width: 600px) {
-
-            .profile-details,
             .academic-grid,
             .quick-actions {
                 grid-template-columns: 1fr;
@@ -584,190 +561,8 @@
                 grid-column: 2;
                 justify-self: start;
             }
-
         }
-
-
-        .student-directory {
-            background: white;
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 5px 15px rgba(0,0,0,.12);
-            margin-bottom: 25px;
-        }
-
-        .student-controls {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-            margin-bottom: 20px;
-        }
-
-        .student-controls input,
-        .student-controls select {
-            padding: 12px 15px;
-            border: 1px solid #d5dce3;
-            border-radius: 10px;
-            font-size: 14px;
-            outline: none;
-        }
-
-        .student-controls input {
-            flex: 1;
-            min-width: 220px;
-        }
-
-        .student-controls select {
-            min-width: 170px;
-            background: white;
-        }
-
-        .student-controls input:focus,
-        .student-controls select:focus {
-            border-color: #0077b6;
-        }
-
-        .student-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 18px;
-        }
-
-        .student-card {
-            padding: 22px;
-            background: #f8fbff;
-            border: 1px solid #d5dce3;
-            border-radius: 16px;
-            transition: .3s;
-        }
-
-        .student-card:hover {
-            transform: translateY(-4px);
-            border-color: #00b4d8;
-            box-shadow: 0 6px 15px rgba(0,119,182,.12);
-        }
-
-        .student-card h3 {
-            color: #003566;
-            margin-bottom: 8px;
-        }
-
-        .student-card .department {
-            display: inline-block;
-            background: #e8f6fb;
-            color: #0077b6;
-            padding: 5px 10px;
-            border-radius: 15px;
-            font-size: 12px;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-
-        .student-card p {
-            margin: 7px 0;
-            color: #555;
-            font-size: 14px;
-        }
-
-        .student-card p b {
-            color: #0077b6;
-        }
-
-        .student-message {
-            background: #f8fbff;
-            padding: 30px;
-            border-radius: 15px;
-            text-align: center;
-            color: #555;
-            grid-column: 1 / -1;
-        }
-
-        .student-pagination {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 8px;
-            margin-top: 22px;
-            flex-wrap: wrap;
-        }
-
-        .student-pagination button {
-            padding: 9px 14px;
-            border: 1px solid #d5dce3;
-            border-radius: 8px;
-            background: white;
-            color: #003566;
-            cursor: pointer;
-            font-weight: bold;
-        }
-
-        .student-pagination button:hover:not(:disabled),
-        .student-pagination button.active {
-            background: #0077b6;
-            color: white;
-            border-color: #0077b6;
-        }
-
-        .student-pagination button:disabled {
-            opacity: .5;
-            cursor: not-allowed;
-        }
-
-        body.dark-mode .student-directory {
-            background: #1e1e1e;
-            color: #eeeeee;
-        }
-
-        body.dark-mode .student-controls input,
-        body.dark-mode .student-controls select {
-            background: #252525;
-            color: #eeeeee;
-            border-color: #444;
-        }
-
-        body.dark-mode .student-card,
-        body.dark-mode .student-message {
-            background: #252525;
-            border-color: #444;
-        }
-
-        body.dark-mode .student-card h3 {
-            color: #00b4d8;
-        }
-
-        body.dark-mode .student-card p {
-            color: #cccccc;
-        }
-
-        body.dark-mode .student-pagination button {
-            background: #252525;
-            color: #eeeeee;
-            border-color: #444;
-        }
-
-        @media(max-width: 900px) {
-            .student-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media(max-width: 600px) {
-            .student-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .student-controls {
-                flex-direction: column;
-            }
-
-            .student-controls input,
-            .student-controls select {
-                width: 100%;
-            }
-        }
-
     </style>
-
 </head>
 
 <body>
@@ -783,37 +578,23 @@
         </button>
 
         <div class="logo-section">
-
             <img src="logo.jfif" alt="StudentHub Logo">
-
             <h1>StudentHub Portal</h1>
-
             <p>Your Digital Campus and Academic Companion</p>
-
         </div>
 
         <nav>
-
             <a href="index.html">Home</a>
-
             <a href="about.html">About</a>
-
             <a href="register.php">Register</a>
-
-            <a href="login.html">Login</a>
-
-            <a href="dashboard.html">Dashboard</a>
-
+            <a href="login.php">Login</a>
+            <a href="dashboard.php">Dashboard</a>
             <a href="events.html">Events</a>
-
             <a href="profile.html">Profile</a>
-
             <a href="contact.html">Contact</a>
-
             <a href="faq.html">FAQ</a>
-
             <a href="feedback.html">Feedback</a>
-
+            <a href="logout.php">Logout</a>
         </nav>
 
     </header>
@@ -821,667 +602,280 @@
     <main class="dashboard-container">
 
         <section class="welcome">
-
-            <h2>Welcome back, Krisha! 👋</h2>
-
-            <p>
-                Here is your personal academic overview.
+            <h2>Welcome back, <?= htmlspecialchars($username, ENT_QUOTES, "UTF-8") ?>! 👋</h2>
+            <p>Here is your personal academic overview.</p>
+            <p class="current-date">
+                Today's Date: <span id="currentDate"></span>
             </p>
-
-        </section>
-
-        <section class="profile-section">
-
-            <h2 class="section-title">
-                👤 Student Profile
-            </h2>
-
-            <div class="profile-layout">
-
-                <div class="profile-user">
-
-                    <div class="profile-avatar">
-                        KP
-                    </div>
-
-                    <h3>Krisha Patel</h3>
-
-                    <p>Computer Engineering</p>
-
-                </div>
-
-                <div class="profile-details">
-
-                    <div class="profile-item">
-                        <span>Enrollment Number</span>
-                        <p>25CS068</p>
-                    </div>
-
-                    <div class="profile-item">
-                        <span>Year</span>
-                        <p>2nd Year</p>
-                    </div>
-
-                    <div class="profile-item">
-                        <span>Email</span>
-                        <p>krisha@example.com</p>
-                    </div>
-
-                    <div class="profile-item">
-                        <span>Mobile</span>
-                        <p>9876543210</p>
-                    </div>
-
-                    <div class="profile-item">
-                        <span>City</span>
-                        <p>Ahmedabad</p>
-                    </div>
-
-                    <div class="profile-item">
-                        <span>Profile Status</span>
-                        <p>100% Complete</p>
-                    </div>
-
-                </div>
-
-            </div>
-
         </section>
 
         <section class="dashboard-grid">
 
             <div class="dashboard-card">
-
-                <h2 class="section-title">
-                    📊 Attendance
-                </h2>
+                <h2 class="section-title">📊 Attendance</h2>
 
                 <div class="attendance-header">
-
                     <div class="attendance-circle">
-
                         <strong>92%</strong>
-
                         <span>Overall</span>
-
                     </div>
-
                     <div>
-
                         <h3>Good Attendance</h3>
-
-                        <p>
-                            Keep maintaining your regular attendance.
-                        </p>
-
+                        <p>Keep maintaining your regular attendance.</p>
                     </div>
-
                 </div>
 
                 <div class="subject">
-
                     <div class="subject-top">
                         <span>Web Development</span>
                         <b>95%</b>
                     </div>
-
                     <div class="progress">
                         <div class="progress-bar" style="width:95%;"></div>
                     </div>
-
                 </div>
 
                 <div class="subject">
-
                     <div class="subject-top">
                         <span>Java Programming</span>
                         <b>90%</b>
                     </div>
-
                     <div class="progress">
                         <div class="progress-bar" style="width:90%;"></div>
                     </div>
-
                 </div>
 
                 <div class="subject">
-
                     <div class="subject-top">
                         <span>Computer Networks</span>
                         <b>88%</b>
                     </div>
-
                     <div class="progress">
                         <div class="progress-bar" style="width:88%;"></div>
                     </div>
-
                 </div>
 
                 <div class="subject">
-
                     <div class="subject-top">
                         <span>Data Structures</span>
                         <b>93%</b>
                     </div>
-
                     <div class="progress">
                         <div class="progress-bar" style="width:93%;"></div>
                     </div>
-
                 </div>
-
             </div>
 
             <div class="dashboard-card">
-
-                <h2 class="section-title">
-                    📚 Academic Overview
-                </h2>
+                <h2 class="section-title">📚 Academic Overview</h2>
 
                 <div class="academic-grid">
-
                     <div class="academic-card">
                         <span>Subjects</span>
                         <strong>6</strong>
                     </div>
-
                     <div class="academic-card">
                         <span>Total Assignments</span>
                         <strong>12</strong>
                     </div>
-
                     <div class="academic-card">
                         <span>Completed</span>
                         <strong>7</strong>
                     </div>
-
                     <div class="academic-card">
                         <span>Pending</span>
                         <strong>4</strong>
                     </div>
-
                 </div>
-
             </div>
 
         </section>
 
         <section class="assignment-section">
-
             <div class="assignment-header">
-
-                <h2 class="section-title">
-                    📝 Assignment Hub
-                </h2>
-
-                <span class="assignment-count">
-                    12 Assignments
-                </span>
-
+                <h2 class="section-title">📝 Assignment Hub</h2>
+                <span class="assignment-count">12 Assignments</span>
             </div>
 
             <div class="assignment-controls">
-
-                <input
-                    type="text"
-                    class="assignment-search"
-                    placeholder="🔍 Search assignment..."
-                >
+                <input type="text" class="assignment-search" placeholder="🔍 Search assignment...">
 
                 <select class="assignment-filter">
-
                     <option>All Assignments</option>
-
                     <option>Completed</option>
-
                     <option>Pending</option>
-
                     <option>In Progress</option>
-
                 </select>
-
             </div>
 
             <div class="assignment-scroll">
-
                 <div class="assignment-list">
 
                     <div class="assignment">
-
-                        <div class="assignment-number">
-                            01
-                        </div>
-
+                        <div class="assignment-number">01</div>
                         <div class="assignment-info">
-
                             <h4>Java Programming Practical</h4>
-
                             <p>Object-Oriented Programming</p>
-
                             <small>Submitted: 02 Oct 2026</small>
-
                         </div>
-
-                        <span class="status completed">
-                            ✓ Completed
-                        </span>
-
-                        <span class="marks">
-                            9/10
-                        </span>
-
+                        <span class="status completed">✓ Completed</span>
+                        <span class="marks">9/10</span>
                     </div>
 
                     <div class="assignment">
-
-                        <div class="assignment-number">
-                            02
-                        </div>
-
+                        <div class="assignment-number">02</div>
                         <div class="assignment-info">
-
                             <h4>Web Development Assignment</h4>
-
                             <p>Fetch API and JSON</p>
-
                             <small>Submitted: 01 Oct 2026</small>
-
                         </div>
-
-                        <span class="status completed">
-                            ✓ Completed
-                        </span>
-
-                        <span class="marks">
-                            10/10
-                        </span>
-
+                        <span class="status completed">✓ Completed</span>
+                        <span class="marks">10/10</span>
                     </div>
 
                     <div class="assignment">
-
-                        <div class="assignment-number">
-                            03
-                        </div>
-
+                        <div class="assignment-number">03</div>
                         <div class="assignment-info">
-
                             <h4>Database Assignment</h4>
-
                             <p>SQL and Database Management</p>
-
                             <small>Due: 08 Oct 2026</small>
-
                         </div>
-
-                        <span class="status pending">
-                            ⏳ Pending
-                        </span>
-
+                        <span class="status pending">⏳ Pending</span>
                     </div>
 
                     <div class="assignment">
-
-                        <div class="assignment-number">
-                            04
-                        </div>
-
+                        <div class="assignment-number">04</div>
                         <div class="assignment-info">
-
                             <h4>Computer Networks Practical</h4>
-
                             <p>GNS3 Network Configuration</p>
-
                             <small>Submitted: 29 Sep 2026</small>
-
                         </div>
-
-                        <span class="status completed">
-                            ✓ Completed
-                        </span>
-
-                        <span class="marks">
-                            8/10
-                        </span>
-
+                        <span class="status completed">✓ Completed</span>
+                        <span class="marks">8/10</span>
                     </div>
 
                     <div class="assignment">
-
-                        <div class="assignment-number">
-                            05
-                        </div>
-
+                        <div class="assignment-number">05</div>
                         <div class="assignment-info">
-
                             <h4>Data Structures Assignment</h4>
-
                             <p>Linked List and Trees</p>
-
                             <small>Due: 10 Oct 2026</small>
-
                         </div>
-
-                        <span class="status pending">
-                            ⏳ Pending
-                        </span>
-
+                        <span class="status pending">⏳ Pending</span>
                     </div>
 
                     <div class="assignment">
-
-                        <div class="assignment-number">
-                            06
-                        </div>
-
+                        <div class="assignment-number">06</div>
                         <div class="assignment-info">
-
                             <h4>Java Exception Handling</h4>
-
                             <p>Custom Exception Practical</p>
-
                             <small>Submitted: 26 Sep 2026</small>
-
                         </div>
-
-                        <span class="status completed">
-                            ✓ Completed
-                        </span>
-
-                        <span class="marks">
-                            9/10
-                        </span>
-
+                        <span class="status completed">✓ Completed</span>
+                        <span class="marks">9/10</span>
                     </div>
 
                     <div class="assignment">
-
-                        <div class="assignment-number">
-                            07
-                        </div>
-
+                        <div class="assignment-number">07</div>
                         <div class="assignment-info">
-
                             <h4>HTML5 Registration Form</h4>
-
                             <p>HTML5 and JavaScript Validation</p>
-
                             <small>Submitted: 24 Sep 2026</small>
-
                         </div>
-
-                        <span class="status completed">
-                            ✓ Completed
-                        </span>
-
-                        <span class="marks">
-                            10/10
-                        </span>
-
+                        <span class="status completed">✓ Completed</span>
+                        <span class="marks">10/10</span>
                     </div>
 
                     <div class="assignment">
-
-                        <div class="assignment-number">
-                            08
-                        </div>
-
+                        <div class="assignment-number">08</div>
                         <div class="assignment-info">
-
                             <h4>Thread Pool Practical</h4>
-
                             <p>Java Concurrency and ExecutorService</p>
-
                             <small>In progress</small>
-
                         </div>
-
-                        <span class="status in-progress">
-                            ◉ In Progress
-                        </span>
-
+                        <span class="status in-progress">◉ In Progress</span>
                     </div>
 
                     <div class="assignment">
-
-                        <div class="assignment-number">
-                            09
-                        </div>
-
+                        <div class="assignment-number">09</div>
                         <div class="assignment-info">
-
                             <h4>PHP Form Validation</h4>
-
                             <p>Server Side Form Processing</p>
-
                             <small>Submitted: 20 Sep 2026</small>
-
                         </div>
-
-                        <span class="status completed">
-                            ✓ Completed
-                        </span>
-
-                        <span class="marks">
-                            9/10
-                        </span>
-
+                        <span class="status completed">✓ Completed</span>
+                        <span class="marks">9/10</span>
                     </div>
 
                     <div class="assignment">
-
-                        <div class="assignment-number">
-                            10
-                        </div>
-
+                        <div class="assignment-number">10</div>
                         <div class="assignment-info">
-
                             <h4>Fetch API Practical</h4>
-
                             <p>External JSON Data Rendering</p>
-
                             <small>Due: 12 Oct 2026</small>
-
                         </div>
-
-                        <span class="status pending">
-                            ⏳ Pending
-                        </span>
-
+                        <span class="status pending">⏳ Pending</span>
                     </div>
 
                     <div class="assignment">
-
-                        <div class="assignment-number">
-                            11
-                        </div>
-
+                        <div class="assignment-number">11</div>
                         <div class="assignment-info">
-
                             <h4>OOP MiniBank Project</h4>
-
                             <p>Java Object-Oriented Programming</p>
-
                             <small>Submitted: 18 Sep 2026</small>
-
                         </div>
-
-                        <span class="status completed">
-                            ✓ Completed
-                        </span>
-
-                        <span class="marks">
-                            10/10
-                        </span>
-
+                        <span class="status completed">✓ Completed</span>
+                        <span class="marks">10/10</span>
                     </div>
 
                     <div class="assignment">
-
-                        <div class="assignment-number">
-                            12
-                        </div>
-
+                        <div class="assignment-number">12</div>
                         <div class="assignment-info">
-
                             <h4>Networking Lab Practical</h4>
-
                             <p>Network Topology and Configuration</p>
-
                             <small>Due: 15 Oct 2026</small>
-
                         </div>
-
-                        <span class="status pending">
-                            ⏳ Pending
-                        </span>
-
+                        <span class="status pending">⏳ Pending</span>
                     </div>
 
                 </div>
-
             </div>
-
-        </section>
-
-
-        
-
-        <section class="student-directory">
-
-            <h2 class="section-title">
-                👥 Student Directory
-            </h2>
-
-            <div class="student-controls">
-
-                <input
-                    type="text"
-                    id="studentSearch"
-                    placeholder="🔍 Search student..."
-                >
-
-                <select id="departmentFilter">
-                    <option value="all">All Departments</option>
-                    <option value="CE">CE</option>
-                    <option value="CSE">CSE</option>
-                    <option value="IT">IT</option>
-                </select>
-
-                <select id="yearFilter">
-                    <option value="all">All Years</option>
-                    <option value="1">Year 1</option>
-                    <option value="2">Year 2</option>
-                    <option value="3">Year 3</option>
-                    <option value="4">Year 4</option>
-                </select>
-
-                <select id="sortSelect">
-                    <option value="default">Sort By</option>
-                    <option value="nameAsc">Name A-Z</option>
-                    <option value="nameDesc">Name Z-A</option>
-                </select>
-
-            </div>
-
-            <div id="studentsContainer" class="student-grid">
-                <div class="student-message">
-                    Loading students...
-                </div>
-            </div>
-
-            <div id="pagination" class="student-pagination"></div>
-
         </section>
 
         <section class="bottom-grid">
 
             <div class="bottom-card">
-
-                <h2 class="section-title">
-                    🕐 Recent Activity
-                </h2>
+                <h2 class="section-title">🕐 Recent Activity</h2>
 
                 <div class="activity-list">
-
                     <div class="activity">
-
-                        <div class="activity-icon">
-                            ✓
-                        </div>
-
-                        <p>
-                            Web Development assignment submitted
-                        </p>
-
+                        <div class="activity-icon">✓</div>
+                        <p>Web Development assignment submitted</p>
                     </div>
-
                     <div class="activity">
-
-                        <div class="activity-icon">
-                            ✓
-                        </div>
-
-                        <p>
-                            Java practical completed
-                        </p>
-
+                        <div class="activity-icon">✓</div>
+                        <p>Java practical completed</p>
                     </div>
-
                     <div class="activity">
-
-                        <div class="activity-icon">
-                            ✓
-                        </div>
-
-                        <p>
-                            Profile information updated
-                        </p>
-
+                        <div class="activity-icon">✓</div>
+                        <p>Profile information updated</p>
                     </div>
-
                     <div class="activity">
-
-                        <div class="activity-icon">
-                            ✓
-                        </div>
-
-                        <p>
-                            StudentHub account activated
-                        </p>
-
+                        <div class="activity-icon">✓</div>
+                        <p>StudentHub account activated</p>
                     </div>
-
                 </div>
-
             </div>
 
             <div class="bottom-card">
-
-                <h2 class="section-title">
-                    ⚡ Quick Actions
-                </h2>
+                <h2 class="section-title">⚡ Quick Actions</h2>
 
                 <div class="quick-actions">
-
-                    <a href="profile.html">
-                        View Profile
-                    </a>
-
-                    <a href="events.html">
-                        View Events
-                    </a>
-
-                    <a href="feedback.html">
-                        Give Feedback
-                    </a>
-
-                    <a href="contact.html">
-                        Contact Support
-                    </a>
-
+                    <a href="profile.html">View Profile</a>
+                    <a href="events.html">View Events</a>
+                    <a href="feedback.html">Give Feedback</a>
+                    <a href="contact.html">Contact Support</a>
                 </div>
-
             </div>
 
         </section>
@@ -1489,17 +883,22 @@
     </main>
 
     <footer>
-
-        <p>
-            &copy; 2026 StudentHub Portal | Designed for Students
-        </p>
-
+        <p>&copy; 2026 StudentHub Portal | Designed for Students</p>
     </footer>
 
-    <script src="dashboard.js"></script>
+    <script>
+        const dashboardDateValue = new Date();
 
+        document.getElementById("currentDate").textContent =
+            dashboardDateValue.toLocaleDateString("en-IN", {
+                day: "2-digit",
+                month: "long",
+                year: "numeric"
+            });
+    </script>
+
+    <script src="dashboard.js"></script>
     <script src="scriptcomman.js"></script>
 
 </body>
-
 </html>

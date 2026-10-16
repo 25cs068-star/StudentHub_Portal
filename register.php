@@ -507,8 +507,8 @@ body.dark-mode .terms label {
         <a href="index.html">Home</a>
         <a href="about.html">About</a>
         <a href="register.php">Register</a>
-        <a href="login.html">Login</a>
-        <a href="dashboard.html">Dashboard</a>
+        <a href="login.php">Login</a>
+        <a href="dashboard.php">Dashboard</a>
         <a href="events.html">Events</a>
         <a href="profile.html">Profile</a>
         <a href="contact.html">Contact</a>
