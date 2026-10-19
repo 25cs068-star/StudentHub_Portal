@@ -109,6 +109,12 @@ if (!$check->execute()) {
 $check->store_result();
 
 if ($check->num_rows > 0) {
+
+
+
+
+
+
     $check->close();
     $conn->close();
 

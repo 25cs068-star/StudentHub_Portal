@@ -1,24 +1,17 @@
-php
+
 <?php
 
 $host = "localhost";
-$dbname = "studenthub";
 $username = "root";
 $password = "";
+$dbname = "studenthub";
 
-try {
-    $pdo = new PDO(
-        "mysql:host=$host;dbname=$dbname;charset=utf8mb4",
-        $username,
-        $password
-    );
+$conn = mysqli_connect($host, $username, $password, $dbname);
 
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-
-}
-catch (PDOException $e) {
+if (!$conn) {
     die("Database connection failed.");
 }
+
+mysqli_set_charset($conn, "utf8mb4");
 
 ?>

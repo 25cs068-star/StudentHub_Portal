@@ -287,6 +287,7 @@ try {
     <nav class="admin-nav">
         <a href="admin_dashboard.php">Admin Dashboard</a>
         <a href="#students">Student Directory</a>
+        <a href="students.php">Student Management</a>
         <a href="manage_events.php">Manage Events</a>
         <a href="manage_feedback.php">Manage Feedback</a>
         <a href="contact_messages.php">Contact Messages</a>
